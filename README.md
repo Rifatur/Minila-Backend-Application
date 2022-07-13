@@ -1,11 +1,10 @@
-## Minila -Your Friend with a Car
-# Student Ridesharing App
-<br />
-- The Minila platform invites parents to voluntarily involve them in picking up and dropping off other students along with their children on the way to school, where parents are obliged to donate some amount. Minila main aim is to provide equal opportunities to the students in furthering their education by cutting down the education budget to a great extent. The app is designed for the bangladesh inhabitants and developed on the android & iOS platform. 
+# Minila -Your Friend with a Car
+## Student Ridesharing App
+The Minila platform invites parents to voluntarily involve them in picking up and dropping off other students along with their children on the way to school, where parents are obliged to donate some amount. Minila main aim is to provide equal opportunities to the students in furthering their education by cutting down the education budget to a great extent. The app is designed for the bangladesh inhabitants and developed on the android & iOS platform. 
 
 ## Features
-# Student/Parent Application
-<br />
+### Student/Parent Application
+
 - Signup
 - Login
 - Forgot Password
