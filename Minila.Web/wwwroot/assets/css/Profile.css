@@ -1,0 +1,22 @@
+﻿
+.cover {
+    position: relative;
+    background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height:10rem;
+}
+.media {
+    z-index: 20;
+    margin-top: 50px;
+    position: absolute; 
+    display:flex;
+}
+.Profilename{
+    color:cornflowerblue;
+}
+.profileTable {
+    padding: 10px 0;
+}
+
+

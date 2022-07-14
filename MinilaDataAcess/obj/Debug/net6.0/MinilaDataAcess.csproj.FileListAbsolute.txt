@@ -1,0 +1,28 @@
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.deps.json
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.runtimeconfig.json
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.dll
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.pdb
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.csproj.AssemblyReference.cache
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.AssemblyInfoInputs.cache
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.AssemblyInfo.cs
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.csproj.CoreCompileInputs.cache
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.dll
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\refint\MinilaDataAcess.dll
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.pdb
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.genruntimeconfig.cache
+C:\Users\rifat\source\repos\ProjectMinila\MinilaDataAcess\obj\Debug\net6.0\ref\MinilaDataAcess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.deps.json
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.runtimeconfig.json
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\bin\Debug\net6.0\MinilaDataAcess.pdb
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.csproj.AssemblyReference.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.AssemblyInfoInputs.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.AssemblyInfo.cs
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.csproj.CoreCompileInputs.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\refint\MinilaDataAcess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.pdb
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\MinilaDataAcess.genruntimeconfig.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\MinilaDataAcess\obj\Debug\net6.0\ref\MinilaDataAcess.dll
