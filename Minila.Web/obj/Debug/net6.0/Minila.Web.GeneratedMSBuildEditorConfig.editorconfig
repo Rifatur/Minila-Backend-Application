@@ -15,6 +15,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\rifat\OneDrive\Desktop\Personal Project\Minila-Backend-Application\Minila.Web
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/rifat/OneDrive/Desktop/Personal Project/Minila-Backend-Application/Minila.Web/Views/Chauffeur/ChauffeurDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdWZmZXVyXENoYXVmZmV1ckRldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rifat/OneDrive/Desktop/Personal Project/Minila-Backend-Application/Minila.Web/Views/Chauffeur/CreateChauffeur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdWZmZXVyXENyZWF0ZUNoYXVmZmV1ci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rifat/OneDrive/Desktop/Personal Project/Minila-Backend-Application/Minila.Web/Views/Chauffeur/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdWZmZXVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/rifat/OneDrive/Desktop/Personal Project/Minila-Backend-Application/Minila.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

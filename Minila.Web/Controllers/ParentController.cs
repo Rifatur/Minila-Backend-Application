@@ -51,7 +51,7 @@ namespace Minila.Web.Controllers
             ViewBag.Date = currentDate;
             Random rnd = new Random();
             int myRandomNo = rnd.Next(10000000, 99999999);
-            ViewBag.Code = "PRC"+myRandomNo;
+            ViewBag.Code = "CR"+myRandomNo;
             return View();
         }
         [HttpPost]
