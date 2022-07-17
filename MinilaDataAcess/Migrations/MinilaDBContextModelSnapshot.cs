@@ -316,6 +316,44 @@ namespace MinilaDataAcess.Migrations
                     b.ToTable("Parents");
                 });
 
+            modelBuilder.Entity("MinilaDataAcess.Model.RoadWay", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
+
+                    b.Property<string>("RoadCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoadName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("schoolId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("roadWays");
+                });
+
+            modelBuilder.Entity("MinilaDataAcess.Model.School", b =>
+                {
+                    b.Property<long>("schoolId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("schoolId"), 1L, 1);
+
+                    b.Property<string>("SchoolName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("schoolId");
+
+                    b.ToTable("schools");
+                });
+
             modelBuilder.Entity("MinilaDataAcess.Model.Student", b =>
                 {
                     b.Property<long>("id")
