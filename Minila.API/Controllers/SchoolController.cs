@@ -34,6 +34,7 @@ namespace Minila.API.Controllers
             School AddToSchool = new School
             {
                 SchoolName = model.SchoolName,
+                status = model.status
 
             };
             await _repository.AddAsync(AddToSchool);

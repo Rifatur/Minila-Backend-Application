@@ -333,6 +333,9 @@ namespace MinilaDataAcess.Migrations
                     b.Property<string>("schoolId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
+
                     b.HasKey("id");
 
                     b.ToTable("roadWays");
@@ -348,6 +351,9 @@ namespace MinilaDataAcess.Migrations
 
                     b.Property<string>("SchoolName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
 
                     b.HasKey("schoolId");
 

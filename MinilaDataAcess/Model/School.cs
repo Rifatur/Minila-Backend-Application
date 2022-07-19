@@ -10,6 +10,7 @@ namespace MinilaDataAcess.Model
     {
         public long schoolId { get; set; }
         public string? SchoolName { get; set; }
+        public Boolean status { get; set; }
 
     }
 }

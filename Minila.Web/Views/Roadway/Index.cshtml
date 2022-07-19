@@ -1,0 +1,244 @@
+﻿@model IEnumerable<Minila.Web.Models.RoadWayWebModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="title mb-30">
+                   <button type="button" class="main-btn primary-btn btn-hover" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Road</button>
+                  @*<button type="button" class="main-btn primary-btn btn-hover" data-bs-toggle="modal" data-bs-target="#myModal" > Create New </button>*@
+                </div>
+                  <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form asp-action="CreateRoadWay">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Create RoadWay</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                          <div class="row"><!--Start Row -->
+                                            <div class="col-12">
+                                              <div class="input-style-1">
+                                                <label for="SchoolName">Road Name</label>
+                                                <input type="text" placeholder="Road Name" name="RoadName" id="RoadName"/>
+                                              </div>
+                                            </div><!--End Col -->
+                                            <input type="text" value="@ViewBag.RW"name="RoadCode" id="RoadCode" />
+                                            <div class="col-12">
+                                              <div class="select-style-1">
+                                                <label>Select School</label>
+                                                <div class="select-position">
+                                                  <select name="schoolId" id="schoolId" class="light-bg">
+                                                    <option value="">Select School</option>
+                                                    @foreach (var item in ViewData["school"] as List<SchoolWebModel>)
+                                                    {
+                                                        <option value="@item.schoolId">@item.SchoolName </option>
+                                                    }
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div><!--End Col -->
+
+                                          </div><!--End Row -->
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                <!--End Modal -->
+              </div>
+              <!-- end col -->
+              <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="#0">Dashboard</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Student
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-cart-full"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">New Student</h6>
+                  <h3 class="text-bold mb-10">@ViewBag.TotalSchoollist</h3>
+                  <p class="text-sm text-success">
+                    <i class="lni lni-arrow-up"></i> +2.00%
+                    <span class="text-gray"></span>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-user"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Total Student</h6>
+                  <h3 class="text-bold mb-10">$74,567</h3>
+                  <p class="text-sm text-success">
+                    <i class="lni lni-arrow-up"></i> +5.45%
+                    <span class="text-gray"></span>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-credit-cards"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Total Expense</h6>
+                  <h3 class="text-bold mb-10">$24,567</h3>
+                  <p class="text-sm text-danger">
+                    <i class="lni lni-arrow-down"></i> -2.00%
+                    <span class="text-gray"></span>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon orange">
+                  <i class="lni lni-user"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">New User</h6>
+                  <h3 class="text-bold mb-10">34567</h3>
+                  <p class="text-sm text-danger">
+                    <i class="lni lni-arrow-down"></i> -25.00%
+                    <span class="text-gray"></span>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+
+                   <!-- Start Row  -->
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <!-- start Rank Table -->
+                        <div class="card-style mb-30">
+                          <h6 class="mb-8"></h6>
+                          <!-- <p class="text-sm mb-20">
+                            Use one of two modifier classes to make thead appear light
+                            or dark gray.
+                          </p> -->
+                          <div class="table-wrapper table-responsive">
+                            <table class="table striped-table">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th><h6>Road Name</h6></th>
+                                  <th><h6>Road Code</h6></th>
+                                  <th><h6>School Name</h6></th>
+                                  <th><h6>Status</h6></th>
+                                  <th><h6></h6></th>
+                                </tr>
+                                <!-- end table row-->
+                              </thead>
+                              <tbody>
+                        @if( Model != null)
+                        {
+                          @foreach (var item in Model)
+                                {
+                                <tr>
+                                  <td>
+                                    <h6 class="text-sm">@item.RoadName</h6>
+                                  </td>
+                                  <td>
+                                    <h6 class="text-sm">@item.RoadCode</h6>
+                                  </td>
+                                  <td>
+                                    <p>@item.schoolId </p>
+                                  </td>
+                                   <td>
+                                    @if (@item.status)
+                                    {
+                                        <p>Active</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Deactive</p>
+                                    }
+                                </td>
+                                  <td>
+                                    <div class="action justify-content-end">
+                                      <a asp-controller="Student" asp-action="Details" asp-route-id="@item.schoolId" class="edit">
+                                        <i class="lni lni-eye"></i>
+                                      </a>
+                                      <button
+                                        class="more-btn ml-10 dropdown-toggle"
+                                        id="moreAction1"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="lni lni-more-alt"></i>
+                                      </button>
+                                      <ul
+                                        class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="moreAction1"
+                                      >
+                                        <li class="dropdown-item">
+                                          <a href="#0" class="text-gray">Remove</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                          <a href="#0" class="text-gray">Edit</a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </td>
+                                </tr> 
+                           } 
+                        }
+
+
+                                <!-- end table row -->
+                              </tbody>
+                            </table>
+                            <!-- end table -->
+                          </div>
+                        </div>
+                        <!-- end card -->
+                      </div>
+                      </div>
+                      <!-- End Col -->
+                    </div>
+                    <!-- End Row -->
+
