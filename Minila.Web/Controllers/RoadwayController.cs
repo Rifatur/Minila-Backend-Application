@@ -26,18 +26,18 @@ namespace Minila.Web.Controllers
             ViewBag.RW = "RW" + myRandomNo;
 
             //getting All  List Of Road Way ... 
-            List<RoadWayWebModel> Roadwaylist = new List<RoadWayWebModel>();
-            HttpClient clientRW = new HttpClient();
-            clientRW.BaseAddress = new Uri("https://localhost:7211/");
-            HttpResponseMessage RW_response = await clientRW.GetAsync("Roadway/GetRoadway");
-            if (RW_response.IsSuccessStatusCode)
+            List<RoadWayWebModel> RWlist = new List<RoadWayWebModel>();
+            using(var httpClient = new HttpClient())
             {
-                var result = RW_response.Content.ReadAsStringAsync().Result;
-                Roadwaylist = JsonConvert.DeserializeObject<List<RoadWayWebModel>>(result);
+                using(var getResponse = await httpClient.GetAsync("https://localhost:7211/Roadway/GetRoadway"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    RWlist = JsonConvert.DeserializeObject<List<RoadWayWebModel>>(apiRespose);
+                }
             }
-            ViewBag.TotalRoadwaylist = Roadwaylist.Count();
+            ViewBag.TotalRoadwaylist = RWlist.Count();
 
-            return View(Roadwaylist);
+            return View(RWlist);
 
         }
 
@@ -48,7 +48,7 @@ namespace Minila.Web.Controllers
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7211/");
-            var response = await client.PostAsJsonAsync<RoadWayWebModel>("School/AddSchool", roadWay);
+            var response = await client.PostAsJsonAsync<RoadWayWebModel>("RoadWay/AddRoadWay", roadWay);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("index", "RoadWay");

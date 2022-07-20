@@ -269,6 +269,40 @@ namespace MinilaDataAcess.Migrations
                     b.ToTable("Chauffeurs");
                 });
 
+            modelBuilder.Entity("MinilaDataAcess.Model.FindRider", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
+
+                    b.Property<int>("ChauffeurId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoadId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SchholId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("lastUpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("remark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("findRiders");
+                });
+
             modelBuilder.Entity("MinilaDataAcess.Model.Parent", b =>
                 {
                     b.Property<long>("id")

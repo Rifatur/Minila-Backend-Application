@@ -22,5 +22,6 @@ namespace MinilaDataAcess.Context
         public DbSet<TripRequest> TripRequest { get; set; }
         public DbSet<RoadWay> roadWays { get; set; }
         public DbSet<School> schools { get; set; }
+        public DbSet<FindRider> findRiders { get; set; }
     }
 }
