@@ -88,13 +88,14 @@
                   <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
-                        <form asp-action="CreateRoadWay">
+                        <form asp-action="CreateFindSearch">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Enable Your RoadWay</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
+                                          <input value="@Model.id" type="text" name=" " id="" hidden/>
                                           <div class="row"><!--Start Row -->
                                             <div class="col-12">
                                               <div class="select-style-1">
@@ -126,7 +127,7 @@
                                                 </div>
                                               </div>
                                             </div><!--End Col -->
-
+                                            <input value="@ViewBag.Date" type="text" name="CreateDate " id="CreateDate" />
                                           </div><!--End Row -->
                               </div>
                               <div class="modal-footer">

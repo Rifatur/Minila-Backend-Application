@@ -31,7 +31,9 @@ namespace Minila.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFindRider(CreateFindRiderDtos model)
         {
-
+            DateTime now = DateTime.Now;
+            //Using TimeSpan
+            
             FindRider AddToFindRider = new FindRider
             {
                 ChauffeurId = model.ChauffeurId,
@@ -39,7 +41,7 @@ namespace Minila.API.Controllers
                 SchholId = model.SchholId,
                 remark = model.remark,
                 CreateDate = model.CreateDate,
-                lastUpdateTime = model.lastUpdateTime,
+                lastUpdateTime = now,
 
             };
             await _repository.AddAsync(AddToFindRider);

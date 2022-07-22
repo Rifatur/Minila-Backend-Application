@@ -72,6 +72,11 @@ namespace Minila.Web.Controllers
                 }
             }
             ViewData["school"] = Schoollist;
+
+            //Getting Time 
+            var currentDate = DateOnly.FromDateTime(DateTime.Now);
+            ViewBag.Date = currentDate;
+
             return View(details);
         }
 
@@ -92,6 +97,18 @@ namespace Minila.Web.Controllers
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:7211/");
             var response = await client.PostAsJsonAsync<ChauffeurWebModel>("Chauffeur/AddChauffeur", chauffeur);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("index", "Chauffeur");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateFindSearch(FindRiderWebModel findRider)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:7211/");
+            var response = await client.PostAsJsonAsync<FindRiderWebModel>("FindRider/AddFindRider", findRider);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("index", "Chauffeur");
