@@ -35,6 +35,30 @@ namespace Minila.Web.Controllers
                 var res = response.Content.ReadAsStringAsync().Result;
                 details = JsonConvert.DeserializeObject<Student>(res);
             }
+            //getting All  List Of Road Way ... 
+            List<RoadWayWebModel> RWlist = new List<RoadWayWebModel>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync("https://localhost:7211/Roadway/GetRoadway"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    RWlist = JsonConvert.DeserializeObject<List<RoadWayWebModel>>(apiRespose);
+                }
+            }
+            ViewData["Roadlist"] = RWlist;
+
+            //getting School List .. 
+            List<SchoolWebModel> Schoollist = new List<SchoolWebModel>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync("https://localhost:7211/School/GetSchool"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    Schoollist = JsonConvert.DeserializeObject<List<SchoolWebModel>>(apiRespose);
+                }
+            }
+            ViewData["school"] = Schoollist;
+
             return View(details);
         }
 

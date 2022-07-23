@@ -22,6 +22,8 @@
             </div>
          </div>
          <div class="bg-light p-4 d-flex justify-content-end text-center">
+            <!--Enable Button -->
+            <a href="#" class="btn btn-outline-success btn-sm btn-block " data-bs-toggle="modal" data-bs-target="#exampleModal">Find Rider </a>
             <ul class="list-inline mb-0">
                <li class="list-inline-item">
                   <h5 class="font-weight-bold mb-0 d-block">215</h5>
@@ -77,3 +79,56 @@
    </div>
 </div>
 
+
+
+
+                  <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form asp-action="CreateFindSearch">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Enable Your RoadWay</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                          <div class="row"><!--Start Row -->
+                                            <div class="col-12">
+                                              <div class="select-style-1">
+                                                <label>Select Road</label>
+                                                <div class="select-position">
+                                                  <select name="RoadId" id="RoadId" class="light-bg">
+                                                    <option value="">Select Road Way</option>
+                                                    @foreach (var road in ViewData["Roadlist"] as List<RoadWayWebModel>)
+                                                    {
+                                                        <option value="@road.id">@road.RoadName </option>
+                                                    }
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div><!--End Col -->
+                                            <div class="col-12">
+                                              <div class="select-style-1">
+                                                <label>Select School</label>
+                                                <div class="select-position">
+                                                  <select name="SchholId" id="SchholId" class="light-bg">
+                                                    <option value="">Select Destination School </option>
+                                                    @foreach (var item in ViewData["school"] as List<SchoolWebModel>)
+                                                    {
+                                                        <option value="@item.schoolId">@item.SchoolName </option>
+                                                    }
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div><!--End Col -->
+                                          </div><!--End Row -->
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" value="Find Rider" class="btn btn-primary" />
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                <!--End Modal -->
