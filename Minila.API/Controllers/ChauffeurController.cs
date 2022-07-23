@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Minila.API.Dtos;
 using MinilaCore.Services.Interfaces;
+using MinilaDataAcess.Context;
 using MinilaDataAcess.Model;
 
 namespace Minila.API.Controllers
@@ -11,9 +12,14 @@ namespace Minila.API.Controllers
     public class ChauffeurController : ControllerBase
     {
         private readonly IRepository<Chauffeur> _repository;
-        public ChauffeurController(IRepository<Chauffeur> repository)
+        protected readonly MinilaDBContext _dbContext;
+        public ChauffeurController(
+            IRepository<Chauffeur> repository,
+            MinilaDBContext dbContext
+         )
         {
             _repository = repository;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
@@ -46,5 +52,14 @@ namespace Minila.API.Controllers
             await _repository.AddAsync(AddToChauffeur);
             return Ok(AddToChauffeur);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetChauffeurRoad(int ChauffeurId)
+        {
+            var GetRoad = _dbContext.findRiders.Where(x => x.ChauffeurId == ChauffeurId).ToList();
+
+            return Ok(GetRoad);
+        }
+
     }
 }

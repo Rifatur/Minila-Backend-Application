@@ -73,6 +73,18 @@ namespace Minila.Web.Controllers
             }
             ViewData["school"] = Schoollist;
 
+            //getting List Of Ride Request .. 
+            List<FindRider> RideRequestlist = new List<FindRider>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync($"https://localhost:7211/Chauffeur/GetChauffeurRoad?ChauffeurId={id}"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    RideRequestlist = JsonConvert.DeserializeObject<List<FindRider>>(apiRespose);
+                }
+            }
+            ViewData["ChauffeurRequest"] = RideRequestlist;
+
             //Getting Time 
             var currentDate = DateOnly.FromDateTime(DateTime.Now);
             ViewBag.Date = currentDate;

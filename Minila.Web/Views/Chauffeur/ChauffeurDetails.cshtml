@@ -1,4 +1,5 @@
-﻿@model MinilaDataAcess.Model.Chauffeur
+﻿@using MinilaDataAcess.Model
+@model MinilaDataAcess.Model.Chauffeur
 @{
     ViewData["Title"] = "ChauffeurDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -80,10 +81,85 @@
 
 </div>
 <div class="row py-5 px-4">
-   <div class="col-md-5 mx-auto">
+   <div class="col-md-12 mx-auto">
+    <div class="row">
+              <div class="col-lg-12">
+                <div class="card-style mb-30">
+                  <h6 class="mb-10">Your Enable Road</h6>
+
+                  <div class="table-wrapper table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th><h6>#</h6></th>
+                          <th><h6>Road Way</h6></th>
+                          <th><h6>School name</h6></th>
+                          <th><h6>Remark</h6></th>
+                          <th><h6>Status</h6></th>
+                          <th><h6>Action</h6></th>
+                        </tr>
+                        <!-- end table row-->
+                      </thead>
+                      <tbody>
+                  @foreach (var road in ViewData["ChauffeurRequest"] as List<FindRider>)
+                  {
+                        <tr>
+                          <td>
+                            <div class="employee-image">
+                              <img src="assets/images/lead/lead-1.png" alt="" />
+                            </div>
+                          </td>
+                          <td class="min-width">
+                             @foreach (var item in ViewData["Roadlist"] as List<RoadWayWebModel>)
+                             {
+                                if(@item.id == @road.RoadId)
+                                {
+                                  <p>@item.RoadName </p>
+                                }  
+                             }  
+                          </td>
+                          <td class="min-width">
+                             @foreach (var item in ViewData["school"] as List<SchoolWebModel>)
+                             {
+                                if(@item.schoolId == @road.SchholId)
+                                {
+                                  <p>@item.SchoolName </p>
+                                }
+                             }
+                          </td>
+                          <td class="min-width">
+                            <p>@road.remark</p>
+                          </td>
+                          <td class="min-width">
+                            <span class="status-btn active-btn">Active</span>
+                          </td>
+                          <td>
+                            <div class="action">
+                              <button class="text-danger">
+                                <i class="lni lni-trash-can"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <!-- end table row -->
+                  }
+                      </tbody>
+                    </table>
+                    <!-- end table -->
+                  </div>
+                </div>
+                <!-- end card -->
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== tables-wrapper end ========== -->
 
    </div>
 </div>
+
+
 
                   <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -95,7 +171,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
-                                          <input value="@Model.id" type="text" name=" " id="" hidden/>
+                                          <input value="@Model.id" type="text" name="ChauffeurId" id="ChauffeurId" hidden/>
                                           <div class="row"><!--Start Row -->
                                             <div class="col-12">
                                               <div class="select-style-1">
@@ -127,7 +203,7 @@
                                                 </div>
                                               </div>
                                             </div><!--End Col -->
-                                            <input value="@ViewBag.Date" type="text" name="CreateDate " id="CreateDate" />
+                                            <input value="@ViewBag.Date" type="text" name="CreateDate" id="CreateDate" hidden/>
                                           </div><!--End Row -->
                               </div>
                               <div class="modal-footer">
