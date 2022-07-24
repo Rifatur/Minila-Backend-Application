@@ -85,5 +85,59 @@ namespace Minila.Web.Controllers
             return View();
         }
 
+
+        //get Rider
+
+        [HttpGet]
+        public async Task<IActionResult> FindChauffeur(int roadid, int SchholId)
+        {
+            //getting School List .. 
+            List<FindRider> GetMyRiderList = new List<FindRider>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync($"https://localhost:7211/Student/GetRider?roadid={roadid}&schoolid={SchholId}"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    GetMyRiderList = JsonConvert.DeserializeObject<List<FindRider>>(apiRespose);
+                }
+            }
+            ViewBag.TotalRiderListCount = GetMyRiderList.Count();
+            //getting All  List Of Road Way ... 
+            List<RoadWayWebModel> RWlist = new List<RoadWayWebModel>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync("https://localhost:7211/Roadway/GetRoadway"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    RWlist = JsonConvert.DeserializeObject<List<RoadWayWebModel>>(apiRespose);
+                }
+            }
+            ViewData["Roadlist"] = RWlist;
+
+            //Getting Chauffeur...
+            List<ChauffeurWebModel> ChauffeuList = new List<ChauffeurWebModel>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync("https://localhost:7211/Chauffeur/GetChauffeurs"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    ChauffeuList = JsonConvert.DeserializeObject<List<ChauffeurWebModel>>(apiRespose);
+                }
+            }
+            ViewData["ChauffeuList"] = ChauffeuList;
+            //getting School List .. 
+            List<SchoolWebModel> Schoollist = new List<SchoolWebModel>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync("https://localhost:7211/School/GetSchool"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    Schoollist = JsonConvert.DeserializeObject<List<SchoolWebModel>>(apiRespose);
+                }
+            }
+            ViewData["school"] = Schoollist;
+
+            return View(GetMyRiderList);
+        }
     }
 }

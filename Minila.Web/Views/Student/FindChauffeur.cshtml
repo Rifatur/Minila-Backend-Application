@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MinilaDataAcess.Model.FindRider>
+@{
+    ViewData["Title"] = "FindChauffeur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Total available Chauffeur @ViewBag.TotalRiderListCount </h1>
+
+@foreach (var item in Model)
+{
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <div class="card-style-1 mb-10">
+                  <div class="card-meta">
+                    <div class="text">
+                      <p class="text-sm text-medium">
+                        <a href="#0">
+                             @foreach (var Chauffeu in ViewData["ChauffeuList"] as List<ChauffeurWebModel>)
+                             {
+                                if(@Chauffeu.id == @item.ChauffeurId)
+                                {
+                                  <p> @Chauffeu.FirstName @Chauffeu.LastName</p>
+                                }
+                             }                           
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card-content">
+                    <h4><a href="#0"> 
+                             @foreach (var school in ViewData["school"] as List<SchoolWebModel>)
+                             {
+                                if(@school.schoolId == @item.SchholId)
+                                {
+                                  <p> @school.SchoolName </p>
+                                }
+                             }                        
+                    </a></h4>
+                    <p>
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <button class="main-btn primary-btn btn-hover" > Send Request  </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- end card-->
+              </div>
+              <!-- end col -->    
+
+
+
+}
