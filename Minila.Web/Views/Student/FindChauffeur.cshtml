@@ -37,15 +37,23 @@
                     </a></h4>
                     <p>
                     </p>
+                      <form asp-controller="TripRequest" asp-action="CreateTripRequest">
                     <div class="d-flex justify-content-between">
-                        <button class="main-btn primary-btn btn-hover" > Send Request  </button>
+                          <input type="text" value="@item.ChauffeurId" id="ChauffeurId" name="ChauffeurId" hidden/>
+                          <input type="text" value="@ViewData["studentId"]" id="StudetID" name="StudetID" hidden/>                     
+                          <input type="text" value="@item.SchholId" id="location" name="location" hidden/>
+                          <input type="text" value="@item.RoadId" id="road" name="road" hidden/>
+                          <input type="text" value="1" id="status" name="status" hidden/>
+                           <input type="text" value="@ViewBag.Date" id="CreateDate" name="CreateDate" hidden/>
+                           <input type="text" value="@ViewBag.time" id="RequestTime" name="RequestTime" hidden />
+                          <input type="submit" value="Send Request" class="main-btn primary-btn btn-hover" />
                     </div>
+                    </form>
                   </div>
                 </div>
                 <!-- end card-->
               </div>
               <!-- end col -->    
-
 
 
 }

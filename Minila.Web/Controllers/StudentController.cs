@@ -58,7 +58,6 @@ namespace Minila.Web.Controllers
                 }
             }
             ViewData["school"] = Schoollist;
-
             return View(details);
         }
 
@@ -89,7 +88,7 @@ namespace Minila.Web.Controllers
         //get Rider
 
         [HttpGet]
-        public async Task<IActionResult> FindChauffeur(int roadid, int SchholId)
+        public async Task<IActionResult> FindChauffeur(int roadid, int SchholId, int studentid)
         {
             //getting School List .. 
             List<FindRider> GetMyRiderList = new List<FindRider>();
@@ -137,6 +136,14 @@ namespace Minila.Web.Controllers
             }
             ViewData["school"] = Schoollist;
 
+            //Static Values 
+
+            ViewData["studentId"] = studentid;
+            var currentDate = DateOnly.FromDateTime(DateTime.Now);
+            ViewBag.Date = currentDate;
+            DateTime now = DateTime.Now;
+            DateTime utc = DateTime.UtcNow;
+            ViewBag.time = now.ToString("T");
             return View(GetMyRiderList);
         }
     }
