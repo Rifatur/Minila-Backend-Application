@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MinilaCore.Services.Interfaces;
+using MinilaDataAcess.Context;
 using MinilaDataAcess.Model;
 
 namespace Minila.API.Controllers
@@ -10,9 +11,11 @@ namespace Minila.API.Controllers
     public class TripRequestController : ControllerBase
     {
         private readonly IRepository<TripRequest> _repository;
-        public TripRequestController(IRepository<TripRequest> repository)
+        protected readonly MinilaDBContext _dbContext;
+        public TripRequestController(IRepository<TripRequest> repository, MinilaDBContext dbContext)
         {
             _repository = repository;
+            _dbContext = dbContext;
         }
 
         [HttpPost]
@@ -36,7 +39,18 @@ namespace Minila.API.Controllers
             return Ok(AddTotripRequest);
         }
 
-
+        [HttpGet]
+        public async Task<IActionResult> GetRequestByChauffeur(string ChauffeurID)
+        {
+            var GetRequestByChauffeur = _dbContext.TripRequest.Where(x => x.ChauffeurId == ChauffeurID).OrderByDescending(c=>c.CreateDate).ToList();
+            return Ok(GetRequestByChauffeur);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetRequestByStudent(string StudentID)
+        {
+            var GetRequestListByStudent = _dbContext.TripRequest.Where(x => x.StudetID == StudentID).OrderByDescending(c => c.CreateDate).ToList();
+            return Ok(GetRequestListByStudent);
+        }
 
     }
 }

@@ -58,6 +58,19 @@ namespace Minila.Web.Controllers
                 }
             }
             ViewData["school"] = Schoollist;
+            //getting Request List
+            List<TripRequest> TripRequestlist = new List<TripRequest>();
+            var studentStringID = id.ToString();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync($"https://localhost:7211/TripRequest/GetRequestByStudent?StudentID={studentStringID}"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    TripRequestlist = JsonConvert.DeserializeObject<List<TripRequest>>(apiRespose);
+                }
+            }
+            ViewData["RideRequest"] = TripRequestlist;
+
             return View(details);
         }
 

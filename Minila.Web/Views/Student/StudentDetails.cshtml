@@ -73,9 +73,93 @@
     </div>
 
 </div>
-<div class="row py-5 px-4">
-   <div class="col-md-5 mx-auto">
+<div class="row py-5 px-0">
+   <div class="col-md-12 mx-auto">
+    <div class="row">
+              <div class="col-lg-12">
+                <div class="card-style mb-30">
+                  <h6 class="mb-10">Your Trip Request List </h6>
 
+                  <div class="table-wrapper table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th><h6>#</h6></th>
+                          <th><h6>Road name</h6></th>
+                          <th><h6>School name</h6></th>
+                          <th><h6>Date</h6></th>
+                          <th><h6>Time</h6></th>
+                          <th><h6>Status</h6></th>
+                          <th><h6>Action</h6></th>
+                        </tr>
+                        <!-- end table row-->
+                      </thead>
+                      <tbody>
+                  @foreach (var trip in ViewData["RideRequest"] as List<MinilaDataAcess.Model.TripRequest>)
+                  {
+                        <tr>
+                          <td>
+                            <div class="employee-image">
+                              <img src="assets/images/lead/lead-1.png" alt="" />
+                            </div>
+                          </td>
+                          <td class="min-width">
+                               @{
+                                    string roadnumber = @trip.road;
+                                    int RoadId = Int32.Parse(roadnumber); 
+                               }
+                             @foreach (var item in ViewData["Roadlist"] as List<RoadWayWebModel>)
+                             {
+                                if(@item.id == RoadId)
+                                {
+                                  <p>@item.RoadName </p>
+                                }  
+                             }  
+                          </td>
+                          <td class="min-width">
+                              @{
+                                    string number = @trip.location;
+                                    int schoolId = Int32.Parse(number); 
+                               }
+                             @foreach (var item in ViewData["school"] as List<SchoolWebModel>)
+                             {
+                                if(@item.schoolId == schoolId)
+                                {
+                                  <p>@item.SchoolName </p>
+                                }
+                             }
+                          </td>
+                          <td class="min-width">
+                            <p>@trip.CreateDate.ToShortDateString()</p>
+                          </td>
+                          <td class="min-width">
+                            <p>@trip.RequestTime.ToShortTimeString()</p>
+                          </td>
+                          <td class="min-width">
+                            <span class="status-btn active-btn">Active</span>
+                          </td>
+                          <td>
+                            <div class="action">
+                              <button class="text-danger">
+                                <i class="lni lni-trash-can"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <!-- end table row -->
+                  }
+                      </tbody>
+                    </table>
+                    <!-- end table -->
+                  </div>
+                </div>
+                <!-- end card -->
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== tables-wrapper end ========== -->
    </div>
 </div>
 

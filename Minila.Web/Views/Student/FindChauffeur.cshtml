@@ -40,7 +40,9 @@
                       <form asp-controller="TripRequest" asp-action="CreateTripRequest">
                     <div class="d-flex justify-content-between">
                           <input type="text" value="@item.ChauffeurId" id="ChauffeurId" name="ChauffeurId" hidden/>
-                          <input type="text" value="@ViewData["studentId"]" id="StudetID" name="StudetID" hidden/>                     
+                          <input type="text" value="@ViewData["studentId"]" id="StudetID" name="StudetID" hidden/> 
+                          <input type="text" value="12" id="lat" name="lat" hidden/>
+                          <input type="text" value="1234" id="lag" name="lag" hidden/>
                           <input type="text" value="@item.SchholId" id="location" name="location" hidden/>
                           <input type="text" value="@item.RoadId" id="road" name="road" hidden/>
                           <input type="text" value="1" id="status" name="status" hidden/>
