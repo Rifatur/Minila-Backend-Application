@@ -89,6 +89,19 @@ namespace Minila.Web.Controllers
             var currentDate = DateOnly.FromDateTime(DateTime.Now);
             ViewBag.Date = currentDate;
 
+            //getting List Of Ride Request .. 
+            List<TripRequest> ChauffeurTripRequest = new List<TripRequest>();
+            var RiderStringID = id.ToString();
+            using (var httpClient = new HttpClient())
+            {  
+                using (var getResponse = await httpClient.GetAsync($"https://localhost:7211/TripRequest/GetRequestByChauffeur?ChauffeurID={RiderStringID}"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    ChauffeurTripRequest = JsonConvert.DeserializeObject<List<TripRequest>>(apiRespose);
+                }
+            }
+            ViewData["TripRequest"] = ChauffeurTripRequest;
+
             return View(details);
         }
 

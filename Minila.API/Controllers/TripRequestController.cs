@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MinilaCore.Services.Interfaces;
 using MinilaDataAcess.Context;
 using MinilaDataAcess.Model;
@@ -38,11 +37,25 @@ namespace Minila.API.Controllers
             await _repository.AddAsync(AddTotripRequest);
             return Ok(AddTotripRequest);
         }
+        [HttpPut]
+        public async Task<IActionResult> UpdateTripRequest(TripRequest TripRequest)
+        {
+            try
+            {
+                await _repository.UpdateAsync(TripRequest);
+                return NoContent();
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error In Retrieving Data From Db");
+            }
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetRequestByChauffeur(string ChauffeurID)
         {
-            var GetRequestByChauffeur = _dbContext.TripRequest.Where(x => x.ChauffeurId == ChauffeurID).OrderByDescending(c=>c.CreateDate).ToList();
+            var GetRequestByChauffeur = _dbContext.TripRequest.Where(x => x.ChauffeurId == ChauffeurID).OrderByDescending(c => c.CreateDate).ToList();
             return Ok(GetRequestByChauffeur);
         }
         [HttpGet]
@@ -51,6 +64,7 @@ namespace Minila.API.Controllers
             var GetRequestListByStudent = _dbContext.TripRequest.Where(x => x.StudetID == StudentID).OrderByDescending(c => c.CreateDate).ToList();
             return Ok(GetRequestListByStudent);
         }
+
 
     }
 }
