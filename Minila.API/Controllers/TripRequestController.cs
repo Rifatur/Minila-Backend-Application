@@ -16,7 +16,11 @@ namespace Minila.API.Controllers
             _repository = repository;
             _dbContext = dbContext;
         }
-
+        public async Task<IActionResult> GetSingleTripRequest(long id)
+        {
+            var findsingleRequest = await _repository.GetByIdAsync(id);
+            return Ok(findsingleRequest);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateTripRequest(TripRequest model)
         {
