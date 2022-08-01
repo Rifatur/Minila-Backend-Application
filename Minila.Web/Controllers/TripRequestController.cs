@@ -10,6 +10,13 @@ namespace Minila.Web.Controllers
             return View();
         }
         //Create Ride Request....
+        [HttpGet]
+        public async Task<IActionResult> SingleTripRequest(long id)
+        {
+
+            return PartialView(nameof(SingleTripRequest), id);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateTripRequest(TripRequest request)
         {
@@ -19,18 +26,6 @@ namespace Minila.Web.Controllers
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("StudentDetails", "Student", new { @id = request.StudetID });
-            }
-            return View();
-        }
-        [HttpPut]
-        public async Task<IActionResult> UpdateTripRequest(TripRequest updateRequest)
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:7211/");
-            var response = await client.PutAsJsonAsync<TripRequest>("TripRequest/UpdateTripRequest", updateRequest);
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("ChauffeurDetails", "Chauffeur", new { @id = updateRequest.ChauffeurId });
             }
             return View();
         }

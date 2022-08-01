@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Minila.API.Dtos;
 using MinilaCore.Services.Interfaces;
 using MinilaDataAcess.Model;
@@ -18,7 +17,7 @@ namespace Minila.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetByParentID(long id)
-        { 
+        {
             var findParent = await _repository.GetByIdAsync(id);
             return Ok(findParent);
         }
@@ -55,11 +54,11 @@ namespace Minila.API.Controllers
             {
                 await _repository.UpdateAsync(parent);
                 return NoContent();
-                
+
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError,"Error In Retrieving Data From Db");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error In Retrieving Data From Db");
             }
         }
 
