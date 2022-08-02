@@ -93,7 +93,7 @@ namespace Minila.Web.Controllers
             List<TripRequest> ChauffeurTripRequest = new List<TripRequest>();
             var RiderStringID = id.ToString();
             using (var httpClient = new HttpClient())
-            {  
+            {
                 using (var getResponse = await httpClient.GetAsync($"https://localhost:7211/TripRequest/GetRequestByChauffeur?ChauffeurID={RiderStringID}"))
                 {
                     string apiRespose = await getResponse.Content.ReadAsStringAsync();
@@ -104,7 +104,34 @@ namespace Minila.Web.Controllers
 
             return View(details);
         }
-
+        //#Edit Trip Request By Rider#
+        [HttpGet]
+        public async Task<IActionResult> EditTripRequest(long id)
+        {
+            TripRequest tripRequest = new TripRequest();
+            using (var httpClient = new HttpClient())
+            {
+                using (var getResponse = await httpClient.GetAsync($"https://localhost:7211/TripRequest/GetSingleTripRequest?id={id}"))
+                {
+                    string apiRespose = await getResponse.Content.ReadAsStringAsync();
+                    tripRequest = JsonConvert.DeserializeObject<TripRequest>(apiRespose);
+                }
+                return View(tripRequest);
+            }
+        }
+        //update
+        [HttpPost]
+        public async Task<IActionResult> EditTripRequest(TripRequest request)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:7211/");
+            var response = await client.PutAsJsonAsync<TripRequest>("TripRequest/UpdateTripRequest", request);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("index", "Chauffeur");
+            }
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> CreateChauffeur()

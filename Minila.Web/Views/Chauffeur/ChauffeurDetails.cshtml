@@ -111,7 +111,7 @@
                                                 switch(@trip.status)
                                                 {
                                                     case 1:
-                                                        <a href="" role="button" class="status-btn active-btn mr-2 " data-bs-toggle="modal" data-bs-target="#RiderTripModal">Confirm</a>
+                                                        <a role="button" class="status-btn active-btn mr-2 " data-url="asp-controller="TripRequest" asp-action="EditTripRequest" asp-route-id="@trip.id" >Confirm</a>
                                                         <span role="button" class="status-btn close-btn">Decliend</span>
                                                         break;
                                                     case 2:
@@ -127,28 +127,7 @@
                                   </button>
                                 </div>
                             </td>
-                        </tr>    
-                            <!-- Modal -->
-                            <div class="modal fade" id="RiderTripModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <form asp-controller="TripRequest" asp-action="UpdateTripRequest" method="post">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Enable Your RoadWay</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                      </div>
-                                      <div class="modal-body">
-                                          <p>@trip.id</p>
-                                          <p>@trip.status</p>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <input type="submit" value="Create" class="btn btn-primary" />
-                                      </div>
-                                    </div>
-                                </form>
-                              </div>
-                            </div>                          
+                        </tr>                            
                         }
                       </tbody>
                     </table>

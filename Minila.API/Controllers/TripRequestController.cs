@@ -16,11 +16,14 @@ namespace Minila.API.Controllers
             _repository = repository;
             _dbContext = dbContext;
         }
+
+        [HttpGet]
         public async Task<IActionResult> GetSingleTripRequest(long id)
         {
             var findsingleRequest = await _repository.GetByIdAsync(id);
             return Ok(findsingleRequest);
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateTripRequest(TripRequest model)
         {
@@ -62,6 +65,7 @@ namespace Minila.API.Controllers
             var GetRequestByChauffeur = _dbContext.TripRequest.Where(x => x.ChauffeurId == ChauffeurID).OrderByDescending(c => c.CreateDate).ToList();
             return Ok(GetRequestByChauffeur);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetRequestByStudent(string StudentID)
         {
