@@ -1,0 +1,406 @@
+﻿@model IEnumerable<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+            <div class="row">
+                <div class="col-lg-8 mb-4 order-0">
+                  <div class="card">
+                    <div class="d-flex align-items-end row">
+                      <div class="col-sm-7">
+                        <div class="card-body">
+                            @{var id = @UserManager.GetUserId(User); }
+                                 @foreach (var Users in ViewData["User"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                    {
+                                    if(@Users.Id == id)
+                                    {
+                                       <h5 class="card-title text-primary">Welcome @Users.FirstName @Users.LastName 🎉</h5>
+                                    }
+                                 }
+                          <p class="mb-4">
+                            Ready, set, go
+                            in just a few quick taps. @ViewBag.Date<br>
+                            Let’s ride
+                          </p>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @if (User.IsInRole("User"))
+                                {
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#FindRiderCreateModal"> Enable Road </button>
+                                    <a href="Admin/EnableRoad" class="btn btn-sm btn-outline-primary">View Enable Road</a>
+                                }
+                                else if (User.IsInRole("Student"))
+                                {
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#FindRiderModal"> Find Ride </button>
+                                }
+                                else
+                                {
+                                   
+                                }
+                            }
+
+                        </div>
+                      </div>
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-4">
+                          <img
+                            src="~/external/assets/img/illustrations/man-with-laptop-light.png"
+                            height="140"
+                            alt="View Badge User"
+                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                            data-app-light-img="illustrations/man-with-laptop-light.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 order-1">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="~/external/assets/img/icons/unicons/chart-success.png"
+                                alt="chart success"
+                                class="rounded"
+                              />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt3"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-block mb-1">Today Request</span>
+                            @{int tCount = 0;}
+                            @if (ViewData["TripRequestByToday"] != null)
+                            {
+                                @foreach (var request in ViewData["TripRequestByToday"] as List<RidingApp.Web.DTOs.ViewModels.TripRequestWebDTOs>)
+                                {
+                                    @if(@request.StudetID == @UserManager.GetUserId(User) ){
+                                        tCount++;
+                                    }
+                                }
+                            }
+                          <h3 class="card-title mb-2">@if(tCount!=null){@tCount} </h3>
+                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="~/external/assets/img/icons/unicons/wallet-info.png"
+                                alt="Credit Card"
+                                class="rounded"
+                              />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt6"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span>Complete trip</span>
+                          <h3 class="card-title text-nowrap mb-1">
+                            @{int triCount = 0;}
+                            @if (ViewData["TotalTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["TotalTrip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                {
+                            @if (@request.tripStatus == "3" )
+                            {
+                                    triCount++;
+                            }
+                                    
+                                }
+                            }
+                            @if(triCount!=null){@triCount}
+                          </h3>
+                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Total Revenue -->
+                <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card">
+                    <div class="row row-bordered g-0">
+                      
+                      <div class="col-md-4">
+                        <div class="card-body">
+                          <div class="text-center">
+
+                          </div>
+                        </div>
+                        
+                        <div class="text-center fw-semibold pt-3 mb-2"></div>
+
+                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
+                          <div class="d-flex">
+                            <div class="me-2">
+                            
+                            </div>
+                            <div class="d-flex flex-column">
+              
+                            </div>
+                          </div>
+                          <div class="d-flex">
+                            <div class="me-2">
+                             
+                            </div>
+                            <div class="d-flex flex-column">
+                             
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--/ Total Revenue -->
+                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                  <div class="row">
+                    <div class="col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img src="~/external/assets/img/icons/unicons/cc-warning.png" alt="Credit Card" class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt4"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="d-block mb-1">Total Trip</span>
+                        @{int count = 0;}
+                        @if (Model != null)
+                        {
+                            @foreach (var trip in Model){
+                                @if(trip.StudetID == @UserManager.GetUserId(User) ){
+                                    count++;
+                                }
+                            }                           
+                        }
+                        <h3 class="card-title text-nowrap mb-2"> @if(@count != null){@count}  </h3>
+                        
+                          <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img src="~/external/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt1"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="fw-semibold d-block mb-1">Total Request</span>
+                            @{int trCount = 0;}
+                            @if (ViewData["TripRequest"] != null)
+                            {
+                                @foreach (var request in ViewData["TripRequest"] as List<RidingApp.Web.DTOs.ViewModels.TripRequestWebDTOs>)
+                                {
+                                    @if(@request.StudetID == @UserManager.GetUserId(User) ){
+                                        trCount++;
+                                    }
+                                }
+                            }
+                          <h3 class="card-title mb-2">@if(@trCount != null){@trCount}</h3>
+                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- </div>
+                    <div class="row"> -->
+                    <div class="col-12 mb-4">
+                      <div class="card">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+
+
+
+            </div>
+
+
+                  <!-- Modal -->
+                    <div class="modal fade " id="FindRiderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form  asp-action="GetRider" method="get">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Create New School </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                      <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                              <label class="form-label" for="roadid">Choice  Road </label>
+                                                  <select name="roadid" id="roadid" class="form-control">
+                                                    <option disabled selected >Select Road</option>
+                                                    @foreach (var road in ViewData["Road"] as List<RidingApp.Web.DTOs.Requests.RoadWayDTOs>)
+                                                    {
+                                                        <option value="@road.Id">@road.RoadName </option>
+                                                    }
+                                                  </select> 
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="SchoolName">Choice institute </label>
+                                                  <select name="SchholId" id="SchholId" class="form-control">
+                                                    <option disabled selected >Select School</option>
+                                                    @foreach (var item in ViewData["school"] as List<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>)
+                                                    {
+                                                        <option value="@item.Id">@item.SchoolName </option>
+                                                    }
+                                                  </select>                                       
+                                            </div>
+                                            <input type="text" class="form-control" value="@UserManager.GetUserName(User)" name="CreatedBy" id="CreatedBy" hidden/>
+                                            <input type="text" class="form-control" value="@ViewBag.Date" name="Created" id="Created" hidden/>
+                                            
+                                        </div>
+                                      </div>
+                              </div>
+
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                <!--End Modal -->
+
+                  <!-- Rider Create Modal -->
+                    <div class="modal fade " id="FindRiderCreateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form asp-controller="RiderHub" asp-action="CreateFindRider">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Enable Your Road For Today </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                      <div class="row">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control" value="@UserManager.GetUserId(User)" name="RiderId" id="RiderId" hidden/>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="RoadName">Choice  Road </label>
+                                                  <select name="RoadWayId" id="RoadWayId" class="form-control">
+                                                    <option disabled selected >Select Road</option>
+                                                    @foreach (var road in ViewData["Road"] as List<RidingApp.Web.DTOs.Requests.RoadWayDTOs>)
+                                                    {
+                                                        <option value="@road.Id">@road.RoadName </option>
+                                                    }
+                                                  </select> 
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="SchoolName">Choice institute </label>
+                                                  <select name="SchholId" id="SchholId" class="form-control" required>
+                                                    <option disabled selected >Select School</option>
+                                                    @foreach (var item in ViewData["school"] as List<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>)
+                                                    {
+                                                        <option value="@item.Id">@item.SchoolName </option>
+                                                    }
+                                                  </select>                                       
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="remark">Remark </label>
+                                                <select name="remark" id="remark" class="form-control" required>
+                                                    <option disabled selected >Select Remark</option>
+                                                    <option value="1 Seat Available" >1 Seat Available</option>
+                                                    <option value="2 Seat Available" >2 Seat Available</option>
+                                                    <option value="3 Seat Available" >3 Seat Available</option>
+                                                </select>
+                                            </div>
+                                            <input type="text" class="form-control" value="@UserManager.GetUserName(User)" name="CreatedBy" id="CreatedBy" hidden/>
+                                            <input type="text" class="form-control" value="@ViewBag.Date" name="Created" id="Created" hidden/>
+                                            <input type="text" class="form-control" value="@ViewBag.time" name="lastUpdateTime" id="lastUpdateTime" hidden/>
+                                            
+                                        </div>
+                                      </div>
+                              </div>
+
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                <!--End Modal -->

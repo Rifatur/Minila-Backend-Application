@@ -1,0 +1,209 @@
+﻿@model RidingApp.Web.DTOs.ViewModels.UserViewWebDTOs
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+    @if (User.Identity.IsAuthenticated)
+
+    {
+    @if (User.IsInRole("User"))
+    {
+        <div class="card mb-4">
+            <h5 class="card-header">Profile Details</h5>
+            <!-- Account -->
+            <div class="card-body">
+                <div class="d-flex align-items-start align-items-sm-center gap-4">
+
+                    <div class="button-wrapper">
+                @foreach (var info in ViewData["UserInfo"] as List<RidingApp.DataAccess.Entities.PersonalDetails>)
+                {
+                    @if (info.UserID == @Model.Id)
+                    {
+                        <a class="btn btn-danger " asp-controller="PersonalDetails" asp-action="DeleteInfo" asp-route-id="@info.Id">Reset info</a>
+                    }
+                    else
+                    {
+                     <button type="button" class="btn btn-outline-secondary account-image-reset mb-4"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="bx bx-reset d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Add Information</span>
+                     </button>                               
+                    }
+                }                      
+
+                    <!-- Modal -->
+                    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form asp-controller="PersonalDetails" asp-action="CreateDetails" method="post">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Insert Details </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <input class="form-control" value="@Model.Id" type="text" id="UserID" name="UserID"  hidden/>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="firstName" class="form-label">Address</label>
+                                                <input class="form-control" type="text" id="Address" name="Address"  autofocus/>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="firstName" class="form-label">NID</label>
+                                                <input class="form-control" type="text" id="NID" name="NID"  autofocus/>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="firstName" class="form-label">Car licenseNo</label>
+                                                <input class="form-control" type="text" id="licenseNo" name="licenseNo"  autofocus/>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <input class="form-control" type="text" value="@Model.UserName" id="CreatedBy" name="CreatedBy"  hidden/>
+                                                <input class="form-control" type="text" id="Created" name="Created"  hidden/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <input type="submit" value="Submit" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--End Modal -->
+                </div>
+            </div>
+        </div>
+        <hr class="my-0" />
+        <div class="card-body">
+            @foreach (var info in ViewData["UserInfo"] as List<RidingApp.DataAccess.Entities.PersonalDetails>)
+            {
+                @if (info.UserID == @Model.Id)
+                {
+                    <ul>
+                        <li> Address : @info.Address </li>
+                        <li> licenseNo : @info.licenseNo </li>
+                        <li> NID : @info.NID </li>
+                    </ul>
+
+                }
+            }
+        </div>
+              <!-- /Account -->
+        </div>
+    }
+
+    //For Driver Information
+    @if (User.IsInRole("Student"))
+    {
+     <div class="card mb-4">
+        <h5 class="card-header">Profile Details</h5>
+        <!-- Account -->
+        <div class="card-body">
+            <div class="d-flex align-items-start align-items-sm-center gap-4">
+
+                <div class="button-wrapper">
+                @foreach (var info in ViewData["UserInfo"] as List<RidingApp.DataAccess.Entities.PersonalDetails>)
+                {
+                    @if (info.UserID != @Model.Id)
+                    {
+                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="bx bx-reset d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block">Add Information</span>
+                    </button>
+                    }
+                    else 
+                    {
+                    <a class="btn btn-danger " asp-controller="PersonalDetails" asp-action="DeleteInfo" asp-route-id="@info.Id">Reset info</a>
+                    }
+
+                }
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form asp-controller="PersonalDetails" asp-action="CreateDetails" method="post">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Insert Details </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <input class="form-control" value="@Model.Id" type="text" id="UserID" name="UserID"  hidden/>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="firstName" class="form-label">Address</label>
+                                                <input class="form-control" type="text" id="Address" name="Address"  autofocus/>
+                                            </div>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="SchoolName">Choice institute </label>
+                                                  <select name="SchoolId" id="SchoolId" class="form-control">
+                                                    <option disabled selected >Select School</option>
+                                                    @foreach (var item in ViewData["school"] as List<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>)
+                                                    {
+                                                        <option value="@item.Id">@item.SchoolName </option>
+                                                    }
+                                                  </select>                                       
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label for="firstName" class="form-label">Identity Card</label>
+                                                <input class="form-control" type="text" id="IdentityCard" name="IdentityCard"  autofocus/>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <input class="form-control" type="text" value="@Model.UserName" id="CreatedBy" name="CreatedBy"  hidden/>
+                                                <input class="form-control"value="@ViewBag.Date" type="text" id="Created" name="Created"  hidden/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <input type="submit" value="Submit" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--End Modal -->
+                </div>
+            </div>
+        </div>
+        <hr class="my-0" />
+        <div class="card-body">
+            @foreach (var info in ViewData["UserInfo"] as List<RidingApp.DataAccess.Entities.PersonalDetails>)
+            {
+                @if (info.UserID == @Model.Id)
+                {
+                    <ul>
+                        <li> Address : @info.Address </li>
+                        <li> School Name : 
+                            
+                                                     
+                           @foreach (var item in ViewData["school"] as List<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>)
+                           {
+                              @if(@info.SchoolId == item.Id)
+                              {
+                               @item.SchoolName               
+                              }
+                           }                         
+                            
+                        </li>
+                        <li> School ID : @info.IdentityCard </li>
+                    </ul>
+
+                }
+            }
+        </div>
+              <!-- /Account -->
+        </div>       
+
+    }
+
+
+}

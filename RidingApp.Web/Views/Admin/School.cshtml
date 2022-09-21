@@ -1,0 +1,149 @@
+﻿@model IEnumerable<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "School";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal"> Create New</button>
+@if(TempData["alertMessage"] != null)
+{
+
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <strong>Success !</strong> @TempData["alertMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if(TempData["alertDeleteMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>Success !</strong> @TempData["alertDeleteMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class=" bg-white py-3 px-2">
+<form asp-controller="Admin" asp-action="School" method="get">
+    <div class="d-flex w-50 ">
+       <div class="input-group input-group-merge">
+          <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+          <input type="text" class="form-control" placeholder="Search..." value="@ViewData["CurrentSearch"]" name="search" aria-label="Search..."aria-describedby="basic-addon-search31"/>
+       </div>
+       <input type="submit" value="Search" class="btn btn-outline-secondary mx-1" />
+    </div>
+</form>
+</div>
+
+          <div class="card">
+            <div class="table-responsive text-nowrap">
+                 <table class="table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Created By</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@item.SchoolName</strong></td>
+                        <td>
+                            @item.CreatedBy
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    @if(@item.CreatedBy == @UserManager.GetUserName(User)){
+                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Modal_@item.Id"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    
+                                     <a class="dropdown-item" asp-controller="School" asp-action="DeleteSchool" asp-route-id="@item.Id"><i class="bx bx-trash me-1"></i> Delete</a>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                  <!-- Modal -->
+                    <div class="modal fade " id="Modal_@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form asp-controller="School" asp-action="UpdateSchool" method="post">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Road Way </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                      <div class="row">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control" value="@item.Id" name="Id" id="Id" hidden/>
+                                            <div class="mb-3">
+                                              <label class="form-label" for="RoadName">School Name</label>
+                                              <input type="text" class="form-control" value="@item.SchoolName" name="SchoolName" id="SchoolName" required />
+                                            </div>
+                                            <input type="text" class="form-control" value="@item.CreatedBy" name="CreatedBy" id="CreatedBy" hidden/>
+                                            <input type="text" class="form-control" value="@UserManager.GetUserName(User)" name="LastModifiedBy" id="LastModifiedBy" hidden/>
+                                            <input type="text" class="form-control" value="@ViewBag.Date" name="Created" id="Created" hidden/>
+                                            
+                                        </div>
+                                      </div>
+                              </div>
+
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                <!--End Modal -->
+                }//End Loop
+                  
+            }   
+            </tbody>
+                </table>
+            </div>
+          </div>
+
+
+                  <!-- Modal -->
+                    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <form asp-controller="School" asp-action="CreateSchool">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Create New School </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                      <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                              <label class="form-label" for="SchoolName">institute Name</label>
+                                              <input type="text" class="form-control" placeholder="institute Name" name="SchoolName" id="SchoolName" required />
+                                            </div>
+                                            <input type="text" class="form-control" value="@UserManager.GetUserName(User)" name="CreatedBy" id="CreatedBy" hidden/>
+                                        </div>
+                                      </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+                              </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                <!--End Modal -->

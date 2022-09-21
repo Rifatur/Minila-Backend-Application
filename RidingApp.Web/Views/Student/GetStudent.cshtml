@@ -1,0 +1,14 @@
+﻿@model IEnumerable<RidingApp.Web.DTOs.ViewModels.UserViewWebDTOs>
+@{
+    ViewData["Title"] = "GetStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetStudent</h1>
+
+@{
+    foreach (var item in Model)
+    {
+        <p> @item.UserName </p>  <p>@item.Id </p>
+    }
+}

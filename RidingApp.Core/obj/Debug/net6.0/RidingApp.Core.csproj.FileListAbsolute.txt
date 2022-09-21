@@ -1,0 +1,30 @@
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.Core.deps.json
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.Core.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.Core.pdb
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.csproj.AssemblyReference.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.AssemblyInfoInputs.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.AssemblyInfo.cs
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.csproj.CoreCompileInputs.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\refint\RidingApp.Core.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.pdb
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\ref\RidingApp.Core.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.DataAccess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.DataAccess.pdb
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.csproj.CopyComplete
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.Core.deps.json
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.Core.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\ref\RidingApp.Core.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.Core.pdb
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.DataAccess.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\bin\Debug\net6.0\RidingApp.DataAccess.pdb
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.csproj.AssemblyReference.cache
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.AssemblyInfoInputs.cache
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.AssemblyInfo.cs
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.csproj.CoreCompileInputs.cache
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.csproj.CopyComplete
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\ref\RidingApp.Core.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.Core\obj\Debug\net6.0\RidingApp.Core.pdb

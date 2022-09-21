@@ -1,0 +1,169 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+      rel="shortcut icon"
+      href="~/assets/images/favicon.png"
+      type="image/x-icon"
+    />
+    <title>Minila | Sign Up</title>
+
+    <!-- ========== All CSS files linkup ========= -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets/css/lineicons.css" />
+    <link rel="stylesheet" href="~/assets/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="~/assets/css/fullcalendar.css" />
+    <link rel="stylesheet" href="~/assets/css/fullcalendar.css" />
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+  </head>
+  <body>
+      <section class="signin-section">
+        <div class="container-fluid">
+          <div class="row g-0 auth-row">
+            <div class="col-lg-6">
+              <div class="auth-cover-wrapper bg-primary-100">
+                <div class="auth-cover">
+                  <div class="title text-center">
+                    <h1 class="text-primary mb-10">Get Started</h1>
+                    <p class="text-medium">
+                      Start creating the best possible user experience
+                      <br class="d-sm-block" />
+                      for you customers.
+                    </p>
+                  </div>
+                  <div class="cover-image">
+                    <img src="~/assets/images/auth/signin-image.svg" alt="" />
+                  </div>
+                  <div class="shape-image">
+                    <img src="~/assets/images/auth/shape.svg" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-lg-6">
+              <div class="signup-wrapper">
+                <div class="form-wrapper">
+                  <h6 class="mb-15">Sign Up Form</h6>
+                  <p class="text-sm mb-25">
+                    Start creating the best possible user experience for you
+                    customers.
+                  </p>
+                  <form asp-controller="Account" asp-action="Register" >
+                    <div class="row">
+                     <div class="row ">
+                        <div class="form-group col-md-6">
+                          <div class="input-style-1">
+                            <label for="FirstName">First Name</label>
+                            <input type="text" placeholder="First Name" name="FirstName" id="FirstName"/>
+                          </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <div class="input-style-1">
+                            <label for="LastName">Last Name</label>
+                            <input type="text" placeholder="Last Name" name="LastName" id="LastName"/>
+                          </div>
+                        </div>
+                     </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Email</label>
+                          <input type="email" placeholder="Email" name="Email" id="Email"/>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Password</label>
+                          <input type="password" placeholder="Password" name="Password" id="Password"/>
+                        </div>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div class="input-style-1">
+                          <label>PhoneNumber</label>
+                          <input type="text" placeholder="PhoneNumber" name="PhoneNumber" id="PhoneNumber"/>
+                        </div>
+                      </div>
+                  <div class="select-style-1">
+                    <label for="RoleSelected">System Role </label>
+                    <div class="select-position">
+                      <select name="RoleSelected" id="RoleSelected" for="RoleSelected" asp-items="@Model.RoleList" >
+                        <option disabled selected >Select System Role</option>
+
+                      </select>
+                    </div>
+                  </div>
+                  <!-- end select -->
+                      <!-- end col -->
+                      <div class="col-12">
+
+                        <!-- Input-->
+                        <input type="text" value="1" name="Status" id="Status" hidden/>
+                        <input type="text" value="@ViewBag.Date" name="Created" id="Created" hidden/>
+                        <input type="text" value="@ViewBag.Date" name="LastModified" id="LastModified" hidden/>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-12">
+                        <div
+                          class="
+                            button-group
+                            d-flex
+                            justify-content-center
+                            flex-wrap
+                          "
+                        >
+                        <input type="submit" value="Sign Up"
+                            class="
+                              main-btn
+                              primary-btn
+                              btn-hover
+                              w-100
+                              text-center
+                            "
+                         />
+
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end row -->
+                  </form>
+                  <div class="singup-option pt-40">
+
+                    <p class="text-sm text-medium text-dark text-center">
+                      Already have an account? <a asp-controller="Account"asp-action="Login" >Sign In</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end col -->
+          </div>
+          <!-- end row -->
+        </div>
+      </section>
+
+    <!-- ========= All Javascript files linkup ======== -->
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/Chart.min.js"></script>
+    <script src="~/assets/js/dynamic-pie-chart.js"></script>
+    <script src="~/assets/js/moment.min.js"></script>
+    <script src="~/assets/js/fullcalendar.js"></script>
+    <script src="~/assets/js/jvectormap.min.js"></script>
+    <script src="~/assets/js/world-merc.js"></script>
+    <script src="~/assets/js/polyfill.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/js/site.js"></script>
+  </body>
+</html>
+
+

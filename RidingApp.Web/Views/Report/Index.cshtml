@@ -1,0 +1,240 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+         <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+
+              </div>
+              <!-- end col -->
+              <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="#0">Dashboard</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Report
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-cart-full"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">TripRequest</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int trCount = 0;}
+                            @if (ViewData["TotalTripRequest"] != null)
+                            {
+                                @foreach (var request in ViewData["TotalTripRequest"] as List<RidingApp.Web.DTOs.ViewModels.TripRequestWebDTOs>)
+                                {
+                                   trCount++;
+                                }
+                            }
+                        @if(trCount!=null){@trCount}
+                  </h3>
+                  <p class="text-sm text-success"> Total
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-dollar"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Today TripRequest</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int tCount = 0;}
+                            @if (ViewData["TripRequestByToday"] != null)
+                            {
+                                @foreach (var request in ViewData["TripRequestByToday"] as List<RidingApp.Web.DTOs.ViewModels.TripRequestWebDTOs>)
+                                {
+                                   tCount++;
+                                }
+                            }
+                        @if(tCount!=null){@tCount}
+                  </h3>
+                  <p class="text-sm text-success">
+                      Today
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-credit-cards"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Trip</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int tripCount = 0;}
+                            @if (ViewData["TotalTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["TotalTrip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                {
+                                   tripCount++;
+                                }
+                            }
+                        @if(tripCount!=null){@tripCount}
+                  </h3>
+                  <p class="text-sm text-success">
+                     Total
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon orange">
+                  <i class="lni lni-user"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Trip</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int tripTCount = 0;}
+                            @if (ViewData["TotalTodayTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["TotalTodayTrip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                {
+                                   tripTCount++;
+                                }
+                            }
+                        @if(tripTCount!=null){@tripTCount}
+                  </h3>
+                  <p class="text-sm text-danger">
+                    Today
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+ <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-cart-full"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Student</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int studentCount = 0;}
+                            @if (ViewData["getstudentList"] != null)
+                            {
+                                @foreach (var request in ViewData["getstudentList"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                {
+                                   studentCount++;
+                                }
+                            }
+                        @if(studentCount!=null){@studentCount}
+                  </h3>
+                  <p class="text-sm text-success">
+                    Total
+                   <span class="text-gray">(30 days)</span>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-dollar"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Chauffeur</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int ChauffeurCount = 0;}
+                            @if (ViewData["TotalTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["getDriverList"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                {
+                                   ChauffeurCount++;
+                                }
+                            }
+                        @if(ChauffeurCount!=null){@ChauffeurCount}
+                  </h3>
+                  <p class="text-sm text-success">
+                    <i class="lni lni-arrow-up"></i> +5.45%
+                    <span class="text-gray">Increased</span>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-credit-cards"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Admin</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int AdminCount = 0;}
+                            @if (ViewData["getAdminList"] != null)
+                            {
+                                @foreach (var request in ViewData["getAdminList"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                {
+                                   AdminCount++;
+                                }
+                            }
+                        @if(AdminCount!=null){@AdminCount}
+
+                  </h3>
+                  <p class="text-sm text-danger">
+                    Total
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon orange">
+                  <i class="lni lni-user"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">This Year</h6>
+                  <h3 class="text-bold mb-10">34567</h3>
+                  <p class="text-sm text-danger">
+                    <i class="lni lni-arrow-down"></i> -25.00%
+                    <span class="text-gray"> Earning</span>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->

@@ -1,0 +1,171 @@
+﻿@model IEnumerable<RidingApp.DataAccess.Entities.ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+         <!-- ========== title-wrapper start ========== -->
+          <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+
+              </div>
+              <!-- end col -->
+              <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="#0">Dashboard</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Chauffeur
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- ========== title-wrapper end ========== -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-cart-full"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">New Ride</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int tripCount = 0;}
+                            @if (ViewData["TotalTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["TotalTrip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                {
+                                   tripCount++;
+                                }
+                            }
+                        @if(tripCount!=null){@tripCount}
+                  </h3>
+                  <p class="text-sm text-success">
+
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-dollar"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Total Chauffeur</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int ChauffeurCount = 0;}
+                            @if (ViewData["TotalTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["getDriverList"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                {
+                                   ChauffeurCount++;
+                                }
+                            }
+                        @if(ChauffeurCount!=null){@ChauffeurCount}
+                  </h3>
+                  <p class="text-sm text-success">
+
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+  
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+
+
+                   <!-- Start Row  -->
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <!-- start Rank Table -->
+                        <div class="card-style mb-30">
+                          <h6 class="mb-8"></h6>
+                          <!-- <p class="text-sm mb-20">
+                            Use one of two modifier classes to make thead appear light
+                            or dark gray.
+                          </p> -->
+                          <div class="table-wrapper table-responsive">
+                            <table class="table striped-table">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th><h6>Email</h6></th>
+                                  <th><h6></h6></th>
+                                </tr>
+                                <!-- end table row-->
+                              </thead>
+                              <tbody>
+                        @{
+                            int count = 0;
+                        }
+                        @if( Model != null)
+                        {
+                          @foreach (var item in Model)
+                                {
+                                count++;
+                                <tr>
+                                  <td>
+                                    <h6 class="text-sm">@count</h6>
+                                  </td>
+                                  <td>
+                                    <p>@item.UserName</p>
+                                  </td>
+                                  <td>
+                                    <div class="action justify-content-end">
+                                      <a asp-controller="Chauffeur" asp-action="ChauffeurDetails" asp-route-id="@item.Id" class="edit">
+                                        <i class="lni lni-eye"></i>
+                                      </a>
+                                      <button
+                                        class="more-btn ml-10 dropdown-toggle"
+                                        id="moreAction1"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="lni lni-more-alt"></i>
+                                      </button>
+                                      <ul
+                                        class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="moreAction1"
+                                      >
+                                        <li class="dropdown-item">
+                                          <a href="#0" class="text-gray">Remove</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                          <a href="#0" class="text-gray">Edit</a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </td>
+                                </tr> 
+                           } 
+                        }
+
+
+                                <!-- end table row -->
+                              </tbody>
+                            </table>
+                            <!-- end table -->
+                          </div>
+                        </div>
+                        <!-- end card -->
+                      </div>
+                      </div>
+                      <!-- End Col -->
+                    </div>
+                    <!-- End Row -->
+

@@ -1,0 +1,28 @@
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.deps.json
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.runtimeconfig.json
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.pdb
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.csproj.AssemblyReference.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.AssemblyInfoInputs.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.AssemblyInfo.cs
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\refint\RidingApp.DataAccess.dll
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.pdb
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.genruntimeconfig.cache
+C:\Users\rifat\OneDrive\Desktop\Personal Project\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\ref\RidingApp.DataAccess.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.deps.json
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.runtimeconfig.json
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\ref\RidingApp.DataAccess.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\bin\Debug\net6.0\RidingApp.DataAccess.pdb
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.AssemblyInfo.cs
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\ref\RidingApp.DataAccess.dll
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.pdb
+C:\Users\Dulon\OneDrive\Desktop\MinilaRidingApp\RidingApp.DataAccess\obj\Debug\net6.0\RidingApp.DataAccess.genruntimeconfig.cache

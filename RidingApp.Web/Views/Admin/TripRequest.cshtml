@@ -1,0 +1,473 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<RidingApp.Web.DTOs.ViewModels.TripRequestWebDTOs>
+@{
+    ViewData["Title"] = "TripRequest";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h1>TripRequest</h1>
+
+<div class="row">
+                <!-- Layout New Request-->
+                <div class="col-xxl">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                    @if (User.IsInRole("User"))
+                    {
+                        <h5 class="mb-0">Incoming Request</h5>
+                    }
+                    else{
+                        <h5 class="mb-0">Send Request List</h5> 
+                    }
+                        <small class="text-muted float-end">New Request</small>
+                    </div>
+                    <div class="card-body"><!--  body -->
+                        <div class="table-responsive text-nowrap">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Rider Name</th>
+                                <th>Drop-Off </th>
+                                <th>Pick Up</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+
+                            <tbody class="table-border-bottom-0">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @if (User.IsInRole("User"))//This is For Driver
+                                {
+                                  @if (Model != null)
+                                  {
+                                    @foreach (var item in Model)
+                                    {
+                                        @if(@item.ChauffeurId == @UserManager.GetUserId(User))
+                                        {
+                                            <tr>
+                                                <td>
+                                                  @foreach (var Users in ViewData["User"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                                  {
+                                                    if(@Users.Id ==  @item.StudetID)
+                                                    {
+                                                       <span class=" d-block"> @Users.FirstName @Users.LastName </span>
+                                                    }
+                                                  }
+                                                </td>
+                                                    @{
+                                                        string val1 = @item.location; 
+                                                        string val2 = @item.road; 
+                                                        long schoolId = long.Parse(val1);
+                                                        long roadId = long.Parse(val2);
+                                                        var rid = int.Parse(val2);
+                                                    }
+                                                 <td>
+                                                        @if (ViewData["school"] !=null)
+                                                        {
+                                                           @foreach (var school in ViewData["school"] as List<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>)
+                                                            {
+                                                                @if(@school.Id == schoolId)
+                                                                {
+                                                                    @school.SchoolName
+                                                                }
+                                                            }                                                         
+                                                        }
+                                                </td>
+                                                
+                                                <td>
+                                                        @if (ViewData["Road"] !=null)
+                                                        {
+                                                           @foreach (var road in ViewData["Road"] as List<RidingApp.Web.DTOs.Requests.RoadWayDTOs>)
+                                                            {
+                                                                @if(@road.Id == roadId)
+                                                                {
+                                                                    @road.RoadName
+                                                                }
+                                                            }                                                         
+                                                        }
+                                                </td>                                              
+                                                <td>
+                                                    
+                                                    @if(@item.status == 1)
+                                                    {
+                                                        <span class="badge bg-label-warning me-1">Pending</span>    
+                                                    }
+                                                    else if (@item.status == 2)
+                                                    {
+                                                              //Create Trip 
+                                                              <form asp-controller="Trip" asp-action="CreateTrip" method="post">
+                                                                   <input type="text" value="@item.id" id="TripRequestId" name="TripRequestId" hidden/>
+                                                                   <input type="text" value="@item.ChauffeurId" id="DriverId" name="DriverId" hidden/>
+                                                                   <input type="text" value="@item.StudetID" id="StudetID" name="StudetID" hidden/> 
+                                                                   <input type="text" value="@ViewBag.time" id="tripStart" name="tripStart" hidden/> 
+                                                                   <input type="text" value="@ViewBag.time" id="tripEnd" name="tripEnd" hidden/> 
+                                                                   <input type="text" value="@item.road" id="endLocation" name="endLocation" hidden/>
+                                                                   <input type="text" value="@item.location" id="startLocation" name="startLocation" hidden/>
+                                                                   <input type="text" value="2" id="status" name="status" hidden/>
+                                                                   <input type="text" value="@UserManager.GetUserName(User)"id="CreatedBy" name="CreatedBy" hidden/>
+                                                                   <input type="text" value="@ViewBag.Date" id="Created" name="Created" hidden/>
+                                                                   <button type="submit"  class="badge bg-label-success me-1 border-0" >Start Trip</button>
+                                                        
+                                                            </form>
+                                                    }
+                                                    else if (@item.status == 3)
+                                                    {
+                                                      
+                                                    }
+
+                                                    
+                                                 </td>
+                                                 <td>
+                                                        @if (ViewData["Trip"] !=null)
+                                                        {
+                                                           @foreach (var trip in ViewData["Trip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                                            {
+                                                                @if(@trip.TripRequestId == @item.id)
+                                                                {
+                                                                    @if(@trip.tripStatus =="1"){
+                                                                        <span class="badge bg-label-warning me-1">waitng for Approve </span>
+                                                                    }
+                                                                    else if(@trip.tripStatus =="2"){
+                                                                        <form asp-controller="Trip" asp-action="UpdateTrip" method="post">
+                                                                                <input type="text" value="@trip.Id" id="Id" name="Id" hidden/>
+                                                                                <input type="text" value="@trip.TripRequestId" id="TripRequestId" name="TripRequestId" hidden/>
+                                                                                <input type="text" value="@trip.DriverId" id="DriverId" name="DriverId" hidden/>
+                                                                                <input type="text" value="@trip.StudetID" id="StudetID" name="StudetID" hidden/> 
+                                                                                <input type="text" value="@trip.tripStart" id="tripStart" name="tripStart" hidden/> 
+                                                                                <input type="text" value="@ViewBag.time" id="tripEnd" name="tripEnd" hidden/> 
+                                                                                <input type="text" value="@trip.endLocation" id="endLocation" name="endLocation" hidden/>
+                                                                                <input type="text" value="@trip.startLocation" id="startLocation" name="startLocation" hidden/>
+                                                                                <input type="text" value="3" id="tripStatus" name="tripStatus" hidden/>
+                                                                                <input type="text" value="@trip.CreatedBy"id="CreatedBy" name="CreatedBy" hidden/>
+                                                                                <input type="text" value="@UserManager.GetUserName(User)"id="LastModifiedBy" name="LastModifiedBy" hidden/>
+                                                                                <input type="text" value="@trip.Created" id="Created" name="Created" hidden/>
+                                                                            <button type="submit"  class="badge bg-label-primary me-1 border-0" >End Trip</button>
+                                                                            </form>
+                                                                    }
+                                                                    else if(@trip.tripStatus == "3"){
+                                                                          <span class="badge bg-label-secondary me-1">completed</span>  
+                                                                    }
+                                                                }
+
+                                                            }                                                         
+                                                        }
+                                                 </td>
+                                                <td>
+                                                  <div class="dropdown">
+                                                            @if(@item.status == 1)
+                                                            {
+                                                                <button type="submit" class="badge bg-label-success me-1 border-0 " data-bs-toggle="modal" data-bs-target="#modal_@item.id">
+                                                                    Accept
+                                                                </button>
+                                                                <button type="submit" class="badge bg-label-danger me-1 border-0 "data-bs-toggle="modal" data-bs-target="#modaldecline_@item.id">
+                                                                    decline
+                                                                </button> 
+                                                                      <!-- Modal For Accept Option-->
+                                                                        <div class="modal fade " id="modal_@item.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                          <div class="modal-dialog">
+                                                                            <form asp-controller="TripRequest" asp-action="UpdateTripRequest" method="post">
+                                                                                <div class="modal-content">
+                                                                                  <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel"> Are you confirm </h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                  </div>
+                                                                                  <div class="modal-body">
+                                                                                          <input type="text" value="@item.id" id="id" name="id" hidden/>
+                                                                                          <input type="text" value="@item.ChauffeurId" id="ChauffeurId" name="ChauffeurId" hidden/>
+                                                                                          <input type="text" value="@item.StudetID" id="StudetID" name="StudetID" hidden/> 
+                                                                                          <input type="text" value="12" id="lat" name="lat" hidden/>
+                                                                                          <input type="text" value="1234" id="lag" name="lag" hidden/>
+                                                                                          <input type="text" value="@item.location" id="location" name="location" hidden/>
+                                                                                          <input type="text" value="@item.road" id="road" name="road" hidden/>
+                                                                                          <input type="text" value="2" id="status" name="status" hidden/>
+                                                                                          <input type="text" value="@ViewBag.Date" id="CreateDate" name="CreateDate" hidden/>
+                                                                                          <input type="text" value="@ViewBag.time" id="RequestTime" name="RequestTime" hidden />
+                                                                                  </div>
+                                                                                  <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                    <input type="submit" value="Confirm" class="btn btn-primary" />
+                                                                                  </div>
+                                                                                </div>
+                                                                            </form>
+                                                                          </div>
+                                                                        </div>
+                                                                    <!--End Modal -->
+                                                                       <!-- Modal For decline option-->
+                                                                        <div class="modal fade " id="modaldecline_@item.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                          <div class="modal-dialog">
+                                                                            <form asp-controller="TripRequest" asp-action="UpdateTripRequest" method="post">
+                                                                                <div class="modal-content">
+                                                                                  <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel"> Are you confirm decline</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                  </div>
+                                                                                  <div class="modal-body">
+                                                                                          <input type="text" value="@item.id" id="id" name="id" hidden/>
+                                                                                          <input type="text" value="@item.ChauffeurId" id="ChauffeurId" name="ChauffeurId" hidden/>
+                                                                                          <input type="text" value="@item.StudetID" id="StudetID" name="StudetID" hidden/> 
+                                                                                          <input type="text" value="12" id="lat" name="lat" hidden/>
+                                                                                          <input type="text" value="1234" id="lag" name="lag" hidden/>
+                                                                                          <input type="text" value="@item.location" id="location" name="location" hidden/>
+                                                                                          <input type="text" value="@item.road" id="road" name="road" hidden/>
+                                                                                          <input type="text" value="3" id="status" name="status" hidden/>
+                                                                                          <input type="text" value="@ViewBag.Date" id="CreateDate" name="CreateDate" hidden/>
+                                                                                          <input type="text" value="@ViewBag.time" id="RequestTime" name="RequestTime" hidden />
+                                                                                  </div>
+                                                                                  <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                    <input type="submit" value="Confirm" class="btn btn-primary" />
+                                                                                  </div>
+                                                                                </div>
+                                                                            </form>
+                                                                          </div>
+                                                                        </div>
+                                                                    <!--End Modal -->                                                               
+                                                            }else if (@item.status == 2)
+                                                            {
+                                                                <button disabled type="submit" class="badge bg-label-dark me-1 border-0">
+                                                                    Accepted
+                                                                </button>
+                                                                 
+                                                            }else if(@item.status == 3){
+
+                                                                <button type="submit" class="badge bg-label-danger me-1 border-0">
+                                                                    Rejected
+                                                                </button>
+                                                                  
+                                                            }
+
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                       <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </button> 
+                                                    <div class="dropdown-menu">
+                                                      <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                                      >
+                                                      <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="bx bx-trash me-1"></i> Delete</a>
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                            </tr>     
+                                            
+
+                                        }
+                                    }
+                                  }                                  
+                                }
+                                else if (User.IsInRole("Student"))
+                                {
+                                  @if (Model != null)
+                                  {
+                                    @foreach (var item in Model)
+                                    {
+                                        @if(@item.StudetID == @UserManager.GetUserId(User))
+                                        {
+                                            <tr>
+                                                <td>
+                                                  @foreach (var Users in ViewData["User"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                                  {
+                                                    if(@Users.Id == @item.ChauffeurId)
+                                                    {
+                                                       <span class=" d-block"> @Users.FirstName @Users.LastName </span>
+                                                    }
+                                                  }
+
+                                                </td>
+                                                    @{
+                                                        string val1 = @item.location; 
+                                                        string val2 = @item.road; 
+                                                        long schoolId = long.Parse(val1);
+                                                        long roadId = long.Parse(val2);
+                                                    }
+                                                 <td>
+                                                        @if (ViewData["school"] !=null)
+                                                        {
+                                                           @foreach (var school in ViewData["school"] as List<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>)
+                                                            {
+                                                                @if(@school.Id == schoolId)
+                                                                {
+                                                                    @school.SchoolName
+                                                                }
+                                                            }                                                         
+                                                        }
+                                                </td>
+                                                
+                                                <td>
+                                                        @if (ViewData["Road"] !=null)
+                                                        {
+                                                           @foreach (var road in ViewData["Road"] as List<RidingApp.Web.DTOs.Requests.RoadWayDTOs>)
+                                                            {
+                                                                @if(@road.Id == roadId)
+                                                                {
+                                                                    @road.RoadName
+                                                                }
+                                                            }                                                         
+                                                        }
+                                                </td>
+                                                <td>@item.RequestDate</td>
+                                                <td>
+                                                    @if(@item.status == 1)
+                                                    {
+                                                        <span class="badge bg-label-warning me-1">pending</span>    
+                                                    }
+                                                    else if (@item.status == 2)
+                                                    {
+                                                       <span class="badge btn-primary me-1">Accepted</span>   
+                                                    }
+                                                    else
+                                                    {
+                                                       <span class="badge bg-label-danger me-1">Rejected</span>     
+                                                    }
+                                                        
+                                                    
+                                                </td>
+                                                <td>
+                                                        @if (ViewData["Trip"] !=null)
+                                                        {
+                                                           @foreach (var trip in ViewData["Trip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                                            {
+                                                                @if(@trip.TripRequestId == @item.id)
+                                                                {
+                                                                    @if(@trip.tripStatus =="1"){
+                                                                <button type="submit" class="badge btn-primary me-1 border-0 " data-bs-toggle="modal" data-bs-target="#modal_@item.id">
+                                                                    Approve
+                                                                </button>
+                                                                <button type="submit" class="badge bg-label-danger me-1 border-0 "data-bs-toggle="modal" data-bs-target="#modaldecline_@item.id">
+                                                                    decline
+                                                                </button> 
+                                                                      <!-- Modal For Accept Option-->
+                                                                        <div class="modal fade " id="modal_@item.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                          <div class="modal-dialog">
+                                                                            <form asp-controller="Trip" asp-action="UpdateTrip" method="post">
+                                                                                <div class="modal-content">
+                                                                                  <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel"> Are you confirm </h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                  </div>
+                                                                                  <div class="modal-body">
+                                                                                       <input type="text" value="@trip.Id" id="Id" name="Id" />
+                                                                                       <input type="text" value="@trip.TripRequestId" id="TripRequestId" name="TripRequestId" hidden/>
+                                                                                       <input type="text" value="@item.ChauffeurId" id="DriverId" name="DriverId" hidden/>
+                                                                                       <input type="text" value="@item.StudetID" id="StudetID" name="StudetID" hidden/> 
+                                                                                       <input type="text" value="@ViewBag.time" id="tripStart" name="tripStart" hidden/> 
+                                                                                       <input type="text" value="@ViewBag.time" id="tripEnd" name="tripEnd" hidden/> 
+                                                                                       <input type="text" value="@trip.endLocation" id="endLocation" name="endLocation" hidden/>
+                                                                                       <input type="text" value="@trip.startLocation" id="startLocation" name="startLocation" hidden/>
+                                                                                       <input type="text" value="2" id="tripStatus" name="tripStatus" hidden/>
+                                                                                       <input type="text" value="@trip.CreatedBy"id="CreatedBy" name="CreatedBy" hidden/>
+                                                                                       <input type="text" value="@UserManager.GetUserName(User)"id="LastModifiedBy" name="LastModifiedBy" hidden/>
+                                                                                       <input type="text" value="@ViewBag.Date" id="Created" name="Created" hidden/>
+                                                                                  </div>
+                                                                                  <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                    <input type="submit" value="Confirm" class="btn btn-primary" />
+                                                                                  </div>
+                                                                                </div>
+                                                                            </form>
+                                                                          </div>
+                                                                        </div>
+                                                                    <!--End Modal -->
+                                                                       <!-- Modal For decline option-->
+                                                                        <div class="modal fade " id="modaldecline_@item.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                          <div class="modal-dialog">
+                                                                            <form asp-controller="TripRequest" asp-action="UpdateTripRequest" method="post">
+                                                                                <div class="modal-content">
+                                                                                  <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel"> Are you confirm decline</h5>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                  </div>
+                                                                                  <div class="modal-body">
+                                                                                          <input type="text" value="@item.id" id="id" name="id" hidden/>
+                                                                                          <input type="text" value="@item.ChauffeurId" id="ChauffeurId" name="ChauffeurId" hidden/>
+                                                                                          <input type="text" value="@item.StudetID" id="StudetID" name="StudetID" hidden/> 
+                                                                                          <input type="text" value="12" id="lat" name="lat" hidden/>
+                                                                                          <input type="text" value="1234" id="lag" name="lag" hidden/>
+                                                                                          <input type="text" value="@item.location" id="location" name="location" hidden/>
+                                                                                          <input type="text" value="@item.road" id="road" name="road" hidden/>
+                                                                                          <input type="text" value="3" id="status" name="status" hidden/>
+                                                                                          <input type="text" value="4" id="tripStatus" name="tripStatus" hidden/>
+                                                                                          <input type="text" value="@ViewBag.Date" id="CreateDate" name="CreateDate" hidden/>
+                                                                                          <input type="text" value="@ViewBag.time" id="RequestTime" name="RequestTime" hidden />
+                                                                                  </div>
+                                                                                  <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                    <input type="submit" value="Confirm" class="btn btn-primary" />
+                                                                                  </div>
+                                                                                </div>
+                                                                            </form>
+                                                                          </div>
+                                                                        </div>
+                                                                    <!--End Modal -->  
+                                                                    }
+                                                                    else if (@trip.tripStatus =="2")
+                                                                    {
+                                                                       <span class="badge bg-label-success me-1"> Trip Started </span> 
+                                                                    }
+                                                                    else if (@trip.tripStatus =="3")
+                                                                    {
+                                                                        <span class="badge bg-label-secondary me-1"> Trip competed </span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="badge bg-label-success me-1"> Trip Cancel </span>
+                                                                    }
+                                                                }
+                                                            @*  else
+                                                                {
+                                                                 //Create Trip 
+                                                                    <form asp-controller="Trip" asp-action="CreateTrip" method="post">
+                                                                       <input type="text" value="@item.id" id="TripRequestId" name="TripRequestId" hidden/>
+                                                                       <input type="text" value="@item.ChauffeurId" id="DriverId" name="DriverId" hidden/>
+                                                                       <input type="text" value="@item.StudetID" id="StudetID" name="StudetID" hidden/> 
+                                                                       <input type="text" value="@ViewBag.time" id="tripStart" name="tripStart" hidden/> 
+                                                                       <input type="text" value="@ViewBag.time" id="tripEnd" name="tripEnd" hidden/> 
+                                                                       <input type="text" value="@item.road" id="endLocation" name="endLocation" hidden/>
+                                                                       <input type="text" value="@item.location" id="startLocation" name="startLocation" hidden/>
+                                                                       <input type="text" value="2" id="status" name="status" hidden/>
+                                                                       <input type="text" value="@UserManager.GetUserName(User)"id="CreatedBy" name="CreatedBy" hidden/>
+                                                                       <input type="text" value="@ViewBag.Date" id="Created" name="Created" hidden/>
+                                                                       <button type="submit"  class="badge bg-label-success me-1 border-0" >Start Trip</button>                                                    
+                                                                  </form>                                                                       
+                                                                }*@
+                                                            }                                                         
+                                                        }
+                                                </td>
+                                                <td>
+                                                  <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                      <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                      <a class="dropdown-item" href="javascript:void(0);"
+                                                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                                      >
+                                                        <a class="dropdown-item" asp-controller="TripRequest" asp-action="DeleteTripRequest" asp-route-id="@item.id"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                    </div>
+                                                  </div>
+                                                </td>
+                                            </tr>                                    
+                                        }
+                                    }
+                                  }
+                                }
+                                else
+                                {
+                                   
+                                }
+                            }
+
+                            </tbody>
+                          </table>
+                        </div>
+                                       
+                    </div>
+                  </div>
+                </div>
+
+ </div>
+

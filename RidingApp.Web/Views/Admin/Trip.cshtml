@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>
+@{
+    ViewData["Title"] = "Trip";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h1>Trip</h1>
+<div class=" bg-white py-3 px-2">
+<form asp-controller="Admin" asp-action="Trip" method="get">
+    <div class="d-flex w-50 ">
+       <div class="input-group input-group-merge">
+          <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+          <input type="text" class="form-control" placeholder="Search..." value="@ViewData["CurrentSearch"]" name="search" aria-label="Search..."aria-describedby="basic-addon-search31"/>
+       </div>
+       <input type="submit" value="Search" class="btn btn-outline-secondary mx-1" />
+    </div>
+</form>
+</div>
+ <div class="card">
+            <div class="table-responsive text-nowrap">
+                 <table class="table">
+                    <thead class="table-light">
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Created By</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@item.tripStart</strong></td>
+                        <td>
+                            @item.CreatedBy
+                        </td>
+                        <td>
+                                    @if (@item.tripStatus =="1" )
+                                    {
+                                        <span class="badge bg-label-warning me-1">Pending</span>
+                                    }
+                                    else if(@item.tripStatus =="2")
+                                    {
+                                       <span class="badge bg-label-success me-1"> Trip Started </span> 
+                                    }
+                                    else if(@item.tripStatus =="3")
+                                    {
+                                    <span class="badge bg-label-secondary me-1"> Trip completed </span>
+                                    }
+                                    else
+                                    {
+                                         <span class="badge bg-label-danger me-1"> Trip Cancel </span>
+                                    }
+                            </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item cursor-pointer" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd_@item.Id" aria-controls="offcanvasEnd"><i class="bx bx-edit-alt me-1"></i> View</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                  <!-- Modal -->
+                        <div class="offcanvas offcanvas-end"  tabindex="-1"id="offcanvasEnd_@item.Id"aria-labelledby="offcanvasEndLabel">
+                          <div class="offcanvas-header">
+                            <h5 id="offcanvasEndLabel" class="offcanvas-title">Trip Details</h5>
+                            <button type="button"class="btn-close text-reset"  data-bs-dismiss="offcanvas"  aria-label="Close"></button>
+                          </div>
+                          <div class="offcanvas-body my-auto mx-0 ">
+                              <p>@item.CreatedBy</p>
+                              <p>@item.Id</p>
+
+                          </div>
+                        </div>
+                <!--End Modal -->
+
+                   }
+                  
+            }   
+            </tbody>
+                </table>
+            </div>
+          </div>

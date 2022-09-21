@@ -1,0 +1,328 @@
+﻿@model IEnumerable<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+        <!-- ========== title-wrapper end ========== -->
+          <div class="row mt-10">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon purple">
+                  <i class="lni lni-cart-full"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">New Trip</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int tCount = 0;}
+                            @if (ViewData["TripRequestByToday"] != null)
+                            {
+                                @foreach (var request in ViewData["TripRequestByToday"] as List<RidingApp.Web.DTOs.ViewModels.TripRequestWebDTOs>)
+                                {
+                                   tCount++;
+                                }
+                            }
+                        @if(tCount!=null){@tCount}
+                  </h3>
+                  <p class="text-sm text-success">
+
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-user"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Total trip</h6>
+                  <h3 class="text-bold mb-10">
+                       @{int tripCount = 0;}
+                            @if (ViewData["TotalTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["TotalTrip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                {
+                                   tripCount++;
+                                }
+                            }
+                        @if(tripCount!=null){@tripCount}
+                  </h3>
+                  <p class="text-sm text-success">
+
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-credit-cards"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Total </h6>
+                  <h3 class="text-bold mb-10"></h3>
+                  <p class="text-sm text-danger">
+
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <div class="icon-card mb-30">
+                <div class="icon orange">
+                  <i class="lni lni-user"></i>
+                </div>
+                <div class="content">
+                  <h6 class="mb-10">Complete trip </h6>
+                  <h3 class="text-bold mb-10">
+                       @{int triCount = 0;}
+                            @if (ViewData["TotalTrip"] != null)
+                            {
+                                @foreach (var request in ViewData["TotalTrip"] as List<RidingApp.Web.DTOs.ViewModels.TripWebDTOs>)
+                                {
+                            @if (@request.tripStatus == "3" )
+                            {
+                                    triCount++;
+                            }
+                                    
+                                }
+                            }
+                        @if(triCount!=null){@triCount}
+                  </h3>
+                  <p class="text-sm text-danger">
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Cart -->
+            </div>
+            <!-- End Col -->
+          </div>
+          <form asp-controller="Trip" asp-action="CreateSchool" >
+          <!-- End Row -->
+            <div class="d-flex  align-items-center">
+
+                  <div class="input-style-1 ">
+                    <label>From Date</label>
+                    <input type="date" />
+                  </div>
+                  <div class="input-style-1 ml-10 ">
+                    <label>To Date</label>
+                    <input type="date" />
+                  </div>
+                  <input type="submit" value="Search" class="btn btn-primary ml-10 h-50 " />
+                
+            </div>
+            </form>
+                   <!-- Start Row  -->
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <!-- start Rank Table -->
+                        <div class="card-style mb-30">
+                          <h6 class="mb-8"></h6>
+                          <!-- <p class="text-sm mb-20">
+                            Use one of two modifier classes to make thead appear light
+                            or dark gray.
+                          </p> -->
+                          <div class="table-wrapper table-responsive">
+                            <table class="table striped-table">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th><h6>Student Name</h6></th>
+                                  <th><h6>Chauffeur Name</h6></th>
+                                  <th><h6>Status</h6></th>
+                                  <th><h6>Date</h6></th>
+                                  <th><h6></h6></th>
+                                </tr>
+                                <!-- end table row-->
+                              </thead>
+                              <tbody>
+                        @{
+                          int count = 0;
+                        }
+                        @if( Model != null)
+                        {
+                          @foreach (var item in Model)
+                                {
+                                count++;
+                                <tr>
+                                  <td>
+                                    <p>@count</p>
+                                  </td>
+                                  <td>
+                                      @foreach (var Users in ViewData["User"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                      {
+                                          if(@Users.Id == @item.StudetID)
+                                          {
+                                            <span class=" d-block"> @Users.FirstName @Users.LastName </span>
+                                          }
+                                      }
+                                    
+                                  </td>
+                                  <td>
+                                      @foreach (var Users in ViewData["User"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                      {
+                                          if(@Users.Id == @item.DriverId)
+                                          {
+                                            <span class=" d-block"> @Users.FirstName @Users.LastName </span>
+                                          }
+                                      }
+                                  </td>
+
+                                   <td>
+                                                 @if (@item.tripStatus =="1" )
+                                                {
+                                                    <span class="badge bg-info text-dark">Panding</span>
+                                                }
+                                                else if(@item.tripStatus =="2")
+                                                {
+                                                  <span class="badge bg-success"> Trip Started </span> 
+                                                }
+                                                else if(@item.tripStatus =="3")
+                                                {
+                                                <span class="badge bg-secondary"> Trip completed </span>
+                                                }
+                                                else
+                                                {
+                                                  <span class="badge bg-danger"> Trip Cancel  </span>
+                                                }
+                                   </td>
+                                   <td>@item.Created</td>
+                                  <td>
+                                    <div class="action justify-content-end">
+                                      <a data-bs-toggle="modal" data-bs-target="#Modal_@item.Id" class="edit ">
+                                        <i class="lni lni-eye cursor-pointer"></i>
+                                      </a>
+                                      <button
+                                        class="more-btn ml-10 dropdown-toggle"
+                                        id="moreAction1"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                      >
+                                        <i class="lni lni-more-alt"></i>
+                                      </button>
+                                      <ul
+                                        class="dropdown-menu dropdown-menu-end"
+                                        aria-labelledby="moreAction1"
+                                      >
+                                        <li class="dropdown-item">
+                                          <a href="#0" class="text-gray">Remove</a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                          <a href="#0" class="text-gray">Edit</a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </td>
+                                </tr> 
+                                //Model
+                              <!-- Modal -->
+                                <div class="modal fade " id="Modal_@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Trip Details</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <div class="row p-2">
+                                                <div class="p-4 rounded bg-light">
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">TripCode </p>
+                                                        <p class="font-italic mb-0">@item.tripCode </p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Trip Status</p>
+                                                             @if (@item.tripStatus =="1" )
+                                                            {
+                                                                <p class="badge bg-info text-dark">Panding</p>
+                                                            }
+                                                            else if(@item.tripStatus =="2")
+                                                            {
+                                                              <p class="badge bg-success"> Trip Started </p> 
+                                                            }
+                                                            else if(@item.tripStatus =="3")
+                                                            {
+                                                            <p class="badge bg-secondary"> Trip competed </p>
+                                                            }
+                                                            else
+                                                            {
+                                                              <p class="badge bg-danger"> Trip Cancel  </p>
+                                                            }
+                                                    </div>
+
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Trip End</p>
+                                                        <p class="font-italic mb-0 ">@item.tripEnd</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Student </p>
+                                                        <p class="font-italic mb-0 ">@item.StudetID</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Driver </p>
+                                                        <p class="font-italic mb-0 ">@item.DriverId</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Drop</p>
+                                                        <p class="font-italic mb-0 ">@item.endLocation</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Pick</p>
+                                                        <p class="font-italic mb-0 ">@item.startLocation</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Created By</p>
+                                                        <p class="font-italic mb-0 ">@item.CreatedBy</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">Created </p>
+                                                        <p class="font-italic mb-0 ">@item.Created</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">ModifiedBy</p>
+                                                        <p class="font-italic mb-0 ">@item.LastModifiedBy</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row">
+                                                        <p class="font-italic mb-0 w-25 d-block">TripRequestId</p>
+                                                        <p class="font-italic mb-0 ">@item.TripRequestId</p>
+                                                    </div>
+                                                </div>
+                                              </div>
+
+                                          </div>
+                                          <div class="modal-footer">
+
+                                          </div>
+                                        </div>
+                         
+                                  </div>
+                                </div>
+                            <!--End Modal -->
+
+                           } 
+                        }
+
+
+                                <!-- end table row -->
+                              </tbody>
+                            </table>
+                            <!-- end table -->
+                          </div>
+                        </div>
+                        <!-- end card -->
+                      </div>
+                      </div>
+                      <!-- End Col -->
+                    </div>
+                    <!-- End Row -->
+

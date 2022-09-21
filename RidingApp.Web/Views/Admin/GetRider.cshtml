@@ -1,0 +1,78 @@
+﻿@model IEnumerable<RidingApp.Web.DTOs.ViewModels.RiderHubDTOs>
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "GetRider";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h1>@ViewBag.TotalRiderListCount</h1>
+
+<div class="row">
+    <div class="col-lg-12 col-md-8 order-o">
+       <div class="row">
+           <div class="col-md-6 col-lg-6">
+                @if(Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                       <div class="card mb-3">
+                           <div class="card-body">
+                               <div class="d-flex justify-content-between ">
+                                 @foreach (var User in ViewData["User"] as List<RidingApp.DataAccess.Entities.ApplicationUser>)
+                                    {
+                                    if(@User.Id == @item.RiderId)
+                                    {
+                                       <h5 class="card-title"> @User.FirstName @User.LastName </h5>
+                                    }
+                                 }
+                                  
+                                  <p>⭐⭐⭐⭐⭐</p>
+                               </div>
+                               <p class="card-text mb-1"><i class='bx bxs-plane-land ml-10'></i><small class="text-muted ml-10">Drop-off : </small>
+                                   
+                                 @foreach (var school in ViewData["school"] as List<RidingApp.Web.DTOs.ViewModels.SchoolWebDTOs>)
+                                    {
+                                    if(@school.Id == @item.SchholId)
+                                    {
+                                       @school.SchoolName 
+                                    }
+                                 } 
+                               </p>
+                               <p class="card-text"><i class='bx bxs-plane ml-10'></i><small class="text-muted ml-10">Pick-up : </small>
+                                  @foreach (var road in ViewData["Road"] as List<RidingApp.Web.DTOs.Requests.RoadWayDTOs>)
+                                  {
+                                    if(@road.Id == @item.RoadWayId)
+                                    {
+                                       @road.RoadName
+                                    }
+                                  }
+                               </p>
+                               <div class="d-flex justify-content-between ">
+                                   <form asp-controller="TripRequest" asp-action="CreateTripRequest">
+                                      <input type="text" value="@item.RiderId" id="ChauffeurId" name="ChauffeurId" hidden/>
+                                      <input type="text" value="@UserManager.GetUserId(User)" id="StudetID" name="StudetID" hidden/> 
+                                      <input type="text" value="12" id="lat" name="lat" hidden/>
+                                      <input type="text" value="1234" id="lag" name="lag" hidden/>
+                                      <input type="text" value="@item.SchholId" id="location" name="location" hidden/>
+                                      <input type="text" value="@item.RoadWayId" id="road" name="road" hidden/>
+                                      <input type="text" value="1" id="status" name="status" hidden/>
+                                       <input type="text" value="@ViewBag.Date" id="RequestDate" name="RequestDate" hidden/>
+                                       <input type="text" value="@ViewBag.time" id="RequestTime" name="RequestTime" hidden />
+                                    <button type="submit" class="btn btn-primary" >Request <i class='bx bx-paper-plane ml-10 '></i></button>
+                                   </form>
+                                   <p class="card-text d-flex align-content-center "><small class="text-muted"><i class='bx bx-chair ml-10'></i>@item.remark </small></p>
+                                   <p class="card-text mt-10"><small class="text-muted"><i class='bx bx-time pr-10'></i> Last updated 3 mins ago</small></p>
+                               </div>
+                           </div>
+                       </div>                        
+                    }
+                }
+           </div>
+       </div>
+    </div>
+
+</div>
+
